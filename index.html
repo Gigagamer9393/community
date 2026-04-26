@@ -1,0 +1,2305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gaming Community GigarazorLp</title>
+<style>
+*{box-sizing:border-box;font-family:"Segoe UI",Arial,Helvetica,sans-serif}
+html,body{margin:0;min-height:100%}
+body{min-height:100vh;display:flex;justify-content:center;align-items:center;background:url("login.jpg") center/cover fixed no-repeat;color:white;padding:24px;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.42);backdrop-filter:blur(4px);z-index:0}
+body.community{background:radial-gradient(circle at 10% 10%,rgba(168,85,247,.35),transparent 32%),radial-gradient(circle at 90% 10%,rgba(236,72,153,.28),transparent 30%),linear-gradient(135deg,#12001f,#1b0634 45%,#090014);align-items:flex-start}
+body.community:before{background:rgba(0,0,0,.08);backdrop-filter:none}
+.app{position:relative;z-index:2;width:min(780px,94vw)}
+.card{position:relative;width:100%;padding:34px 30px;border-radius:30px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.32);box-shadow:0 32px 80px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.24);backdrop-filter:blur(24px);overflow:hidden}
+.card:before{content:"";position:absolute;top:-65%;left:-95%;width:75%;height:240%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.42),transparent);transform:rotate(25deg);animation:shine 5.2s infinite;pointer-events:none}
+@keyframes shine{0%{left:-95%}48%{left:130%}100%{left:130%}}
+#authCard{max-width:430px;margin:0 auto}
+.community-card{display:none;background:linear-gradient(135deg,rgba(168,85,247,.20),rgba(236,72,153,.11)),rgba(15,5,35,.78);border-color:rgba(216,180,254,.34)}
+.community-card.active{display:block}
+.brand,.head{text-align:center;position:relative;z-index:2}
+.logo{width:74px;height:74px;margin:0 auto 14px;border-radius:24px;display:grid;place-items:center;font-size:34px;background:rgba(255,255,255,.20);border:1px solid rgba(255,255,255,.34);box-shadow:0 16px 34px rgba(0,0,0,.28)}
+h1,h2,h3{margin-top:0;text-shadow:0 2px 18px rgba(0,0,0,.3)}
+h1{font-size:31px}
+.neon{color:#f5d0fe;text-shadow:0 0 12px rgba(217,70,239,.9),0 0 28px rgba(168,85,247,.55)}
+.sub{margin-top:8px;font-size:14px;color:rgba(255,255,255,.84);line-height:1.45}
+.tabs{display:flex;gap:10px;margin:22px 0;padding:6px;border-radius:18px;background:rgba(255,255,255,.12);position:relative;z-index:2}
+.tab{width:50%;padding:11px;border:0;border-radius:14px;background:transparent;color:rgba(255,255,255,.8);font-weight:800;cursor:pointer}
+.tab.active{background:rgba(255,255,255,.93);color:#172033}
+.form{display:none;position:relative;z-index:2}
+.form.active{display:block}
+label{display:block;margin-bottom:7px;font-size:14px;font-weight:600}
+.group{margin-bottom:15px}
+.wrap{position:relative}
+input{width:100%;padding:14px 46px 14px 15px;border-radius:15px;border:1px solid rgba(255,255,255,.24);outline:none;color:white;font-size:15px;background:rgba(255,255,255,.18)}
+input:focus{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.66);box-shadow:0 0 0 4px rgba(255,255,255,.12)}
+input::placeholder{color:rgba(255,255,255,.64)}
+.eye{position:absolute;right:11px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:white;cursor:pointer;font-size:16px}
+.btn{width:100%;margin-top:8px;padding:14px;border:0;border-radius:16px;cursor:pointer;font-size:16px;font-weight:900;color:#172033;background:linear-gradient(135deg,#fff,#dbeafe);box-shadow:0 15px 30px rgba(255,255,255,.22)}
+.btn:hover,.ghost:hover,.download:hover,.cookie-btn:hover{transform:translateY(-2px)}
+.link{display:block;margin-top:16px;text-align:center;color:rgba(255,255,255,.92);font-size:14px;text-decoration:none;cursor:pointer;font-weight:650}
+.legal-links{display:flex;gap:10px;margin-top:18px}
+.legal-links button{width:100%;padding:11px;border:1px solid rgba(255,255,255,.28);border-radius:14px;background:rgba(255,255,255,.14);color:white;font-weight:800;cursor:pointer}
+.msg{min-height:22px;margin-top:15px;text-align:center;font-weight:800;font-size:14px}
+.success{color:#86efac}.error{color:#fca5a5}
+.note{margin-top:18px;padding:12px;border-radius:15px;background:rgba(0,0,0,.20);color:rgba(255,255,255,.80);font-size:13px;line-height:1.45;text-align:center;border:1px solid rgba(255,255,255,.12)}
+.legal-box{max-height:430px;overflow:auto;padding:17px;border-radius:19px;background:rgba(0,0,0,.26);border:1px solid rgba(255,255,255,.22);font-size:14px;line-height:1.56}
+.legal-box p{margin:0 0 14px}.legal-box h3{margin:20px 0 8px}
+.back{display:block;margin-top:16px;text-align:center;cursor:pointer;font-weight:700;color:white}
+.clock{position:absolute;top:22px;right:22px;z-index:3;padding:10px 14px;border-radius:18px;text-align:right;background:rgba(20,8,42,.72);border:1px solid rgba(232,121,249,.35);box-shadow:0 0 18px rgba(217,70,239,.22);backdrop-filter:blur(10px)}
+.clock .time{font-size:17px;font-weight:900}.clock .date{font-size:12px;color:#f5d0fe;margin-top:3px}
+.pill{display:inline-flex;margin-bottom:12px;padding:10px 15px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);font-weight:800}
+.hero,.box{position:relative;z-index:2;padding:18px;border-radius:24px;background:linear-gradient(135deg,rgba(168,85,247,.22),rgba(59,130,246,.12)),rgba(255,255,255,.07);border:1px solid rgba(216,180,254,.22);margin-bottom:18px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.social{display:block;padding:15px;border-radius:18px;text-decoration:none;color:white;font-weight:900;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.22);transition:.22s}
+.discord{background:linear-gradient(135deg,#5865f2,#7c3aed)}.youtube{background:linear-gradient(135deg,#ef4444,#be123c)}
+.nav{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:24px 0 16px;position:relative;z-index:2}
+.nav button{padding:11px 8px;border:1px solid rgba(255,255,255,.24);border-radius:14px;background:rgba(255,255,255,.13);color:white;font-weight:850;font-size:13px;cursor:pointer}
+.nav button.active{background:white;color:#172033}
+.content{display:none;margin-bottom:18px;padding:18px;border-radius:22px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.18);position:relative;z-index:2}
+.content.active{display:block}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
+.stat div,.post,.download-card,.video-card{padding:15px;border-radius:18px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.17);margin-top:10px}
+.stat span{display:block;font-size:25px;margin-bottom:6px;text-align:center}
+.stat strong,.stat small{display:block;text-align:center}
+.tag,.meta{display:inline-block;margin:5px 5px 5px 0;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.18);font-size:12px;font-weight:800}
+.download-top{display:flex;justify-content:space-between;gap:12px}.version{white-space:nowrap;padding:6px 10px;border-radius:999px;background:rgba(217,70,239,.22);font-size:12px;font-weight:900}
+.action{display:flex;justify-content:flex-end}
+.download,.cookie-btn,.video-btn{display:inline-flex;justify-content:center;align-items:center;min-width:220px;max-width:100%;margin-top:14px;padding:12px 22px;border-radius:999px;text-decoration:none;color:#fff;font-size:14px;font-weight:900;background:rgba(20,8,42,.92);border:1px solid rgba(232,121,249,.55);cursor:pointer;box-shadow:0 0 18px rgba(217,70,239,.28),0 10px 24px rgba(0,0,0,.25);transition:.22s}
+.video-card{padding:0;overflow:hidden}
+.video-placeholder{min-height:280px;display:grid;place-items:center;text-align:center;padding:24px}
+.video-icon{width:62px;height:62px;display:grid;place-items:center;margin:0 auto 12px;border-radius:999px;background:rgba(20,8,42,.92);border:1px solid rgba(232,121,249,.55);font-size:24px}
+.video-card iframe{width:100%;height:360px;border:0;display:block}
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:relative;z-index:2;margin-top:20px;padding:12px;border-radius:24px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16)}
+.ghost,.logout{min-width:145px;flex:1 1 145px;padding:13px 16px;border-radius:999px;border:1px solid rgba(216,180,254,.26);cursor:pointer;font-size:14px;font-weight:850;color:white;background:rgba(255,255,255,.12);transition:.22s}
+.logout{max-width:220px;background:linear-gradient(135deg,#ef4444,#be123c);font-weight:900}
+.profile{display:none;margin-top:18px;padding:15px;border-radius:18px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.18);font-size:14px;position:relative;z-index:2}
+.profile.active{display:block}
+.cookie{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:50;width:min(760px,calc(100vw - 32px));padding:18px;border-radius:24px;background:rgba(20,8,42,.94);border:1px solid rgba(232,121,249,.45);box-shadow:0 18px 50px rgba(0,0,0,.42);backdrop-filter:blur(16px)}
+.cookie.hidden{display:none}
+.cookie p{font-size:14px;line-height:1.45;color:rgba(255,255,255,.84)}
+.cookie-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cookie-btn{margin-top:0;min-width:190px}
+.cookie-btn.secondary{background:rgba(255,255,255,.10)}
+
+.cookie-title{font-size:20px;font-weight:900;color:#f5d0fe;margin-bottom:8px;letter-spacing:.3px;text-shadow:0 0 14px rgba(217,70,239,.35)}
+.cookie-text,.cookie-note{margin:0 0 12px;color:rgba(255,255,255,.88);line-height:1.6}
+.cookie-list{margin:0 0 12px;padding-left:18px;color:rgba(255,255,255,.9);line-height:1.6}
+.cookie-list li{margin-bottom:7px}
+.cookie{border:1px solid rgba(232,121,249,.5);box-shadow:0 0 0 1px rgba(236,72,153,.08),0 0 28px rgba(217,70,239,.22),0 20px 55px rgba(0,0,0,.45);background:
+linear-gradient(135deg,rgba(30,10,60,.97),rgba(20,8,42,.95)),
+radial-gradient(circle at top right,rgba(236,72,153,.15),transparent 35%)}
+.btn,.download,.cookie-btn,.video-btn,.ghost,.logout{
+position:relative;
+overflow:hidden;
+isolation:isolate;
+}
+.btn::before,.download::before,.cookie-btn::before,.video-btn::before,.ghost::before,.logout::before{
+content:"";
+position:absolute;
+inset:-2px;
+border-radius:inherit;
+padding:1px;
+background:linear-gradient(90deg, rgba(255,0,128,.95), rgba(0,255,255,.95), rgba(149,0,255,.95), rgba(255,0,128,.95));
+background-size:300% 100%;
+-webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+animation:rgbBorder 5s linear infinite;
+z-index:-1;
+opacity:.95;
+filter:blur(.2px);
+}
+.btn::after,.download::after,.cookie-btn::after,.video-btn::after,.ghost::after,.logout::after{
+content:"";
+position:absolute;
+top:-130%;
+left:-55%;
+width:48%;
+height:320%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,.48),transparent);
+transform:rotate(20deg);
+animation:buttonShine 4.8s ease-in-out infinite;
+pointer-events:none;
+z-index:1;
+}
+.btn span,.download span,.cookie-btn span,.video-btn span,.ghost span,.logout span{position:relative;z-index:2}
+.btn,.download,.cookie-btn,.video-btn{
+box-shadow:0 0 18px rgba(168,85,247,.26),0 10px 24px rgba(0,0,0,.25);
+}
+.ghost{box-shadow:0 0 16px rgba(168,85,247,.20),0 10px 20px rgba(0,0,0,.18)}
+.logout{box-shadow:0 0 20px rgba(244,63,94,.28),0 12px 28px rgba(239,68,68,.24)}
+.cookie-btn.secondary{
+background:rgba(255,255,255,.10);
+}
+
+/* Extra Hover-Highlight nach dem Login */
+.social:hover,
+.nav button:hover,
+.ghost:hover,
+.download:hover,
+.video-btn:hover,
+.logout:hover,
+.cookie-btn:hover {
+  transform: translateY(-3px) scale(1.025);
+  filter: brightness(1.12) saturate(1.15);
+}
+
+.nav button:hover {
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, rgba(168,85,247,.34), rgba(236,72,153,.22)),
+    rgba(255,255,255,.18);
+  border-color: rgba(244,114,182,.75);
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.22),
+    0 0 20px rgba(217,70,239,.32),
+    0 12px 26px rgba(0,0,0,.24);
+}
+
+.nav button.active:hover {
+  color: #172033;
+  background: rgba(255,255,255,.96);
+  filter: brightness(1.04);
+}
+
+.social:hover {
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.22),
+    0 0 26px rgba(217,70,239,.32),
+    0 18px 38px rgba(168,85,247,.34);
+}
+
+.download:hover,
+.video-btn:hover,
+.cookie-btn:hover {
+  border-color: rgba(255,255,255,.55);
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.28),
+    0 0 28px rgba(217,70,239,.45),
+    0 16px 34px rgba(0,0,0,.32);
+}
+
+.ghost:hover {
+  border-color: rgba(244,114,182,.75);
+  background:
+    linear-gradient(135deg, rgba(168,85,247,.36), rgba(236,72,153,.22)),
+    rgba(255,255,255,.16);
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.20),
+    0 0 24px rgba(217,70,239,.34),
+    0 14px 30px rgba(0,0,0,.24);
+}
+
+.logout:hover {
+  border-color: rgba(255,255,255,.55);
+  background: linear-gradient(135deg,#fb7185,#e11d48);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.18),
+    0 0 28px rgba(244,63,94,.42),
+    0 16px 34px rgba(239,68,68,.32);
+}
+
+.social:active,
+.nav button:active,
+.ghost:active,
+.download:active,
+.video-btn:active,
+.logout:active,
+.cookie-btn:active {
+  transform: translateY(0) scale(.99);
+}
+@keyframes rgbBorder{
+0%{background-position:0% 50%}
+100%{background-position:300% 50%}
+}
+@keyframes buttonShine{
+0%{left:-65%}
+45%{left:130%}
+100%{left:130%}
+}
+
+/* Extra Glas-/Blur-Effekt für Login, Registrierung und Tabs */
+.tabs{
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 14px 32px rgba(0,0,0,.18);
+}
+
+.tab{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  transition:.25s ease;
+}
+
+.tab::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 36%),
+    linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+  opacity:.45;
+  z-index:-1;
+  transition:.25s ease;
+}
+
+.tab:hover{
+  color:#fff;
+  background:rgba(255,255,255,.18);
+  transform:translateY(-1px);
+  box-shadow:0 0 18px rgba(217,70,239,.22);
+}
+
+.tab:hover::before{
+  opacity:.85;
+}
+
+.tab.active{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.96), rgba(226,232,240,.92));
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.35),
+    0 0 24px rgba(255,255,255,.18),
+    0 12px 26px rgba(0,0,0,.22);
+}
+
+.form.active{
+  padding:18px;
+  margin:0 -8px;
+  border-radius:24px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.04)),
+    rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.13),
+    0 18px 38px rgba(0,0,0,.20);
+}
+
+.input-wrap,
+.wrap{
+  border-radius:15px;
+  background:rgba(255,255,255,.05);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+input{
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 8px 18px rgba(0,0,0,.10);
+}
+
+input:hover{
+  background:rgba(255,255,255,.22);
+  border-color:rgba(255,255,255,.38);
+}
+
+.legal-links button{
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position:relative;
+  overflow:hidden;
+}
+
+.legal-links button:hover{
+  background:rgba(255,255,255,.22);
+  box-shadow:0 0 18px rgba(217,70,239,.22);
+  transform:translateY(-2px);
+}
+
+
+/* Weicher Blur-Wechsel zwischen Anmelden / Registrieren / Passwort */
+.form.active{
+  animation: formBlurSwitch .38s ease both;
+  transform-origin:center;
+}
+
+#authCard.switching .brand,
+#authCard.switching .tabs,
+#authCard.switching .form.active{
+  animation: softPanelPulse .34s ease both;
+}
+
+@keyframes formBlurSwitch{
+  0%{
+    opacity:0;
+    filter:blur(14px);
+    transform:translateY(10px) scale(.985);
+  }
+  55%{
+    opacity:.72;
+    filter:blur(5px);
+  }
+  100%{
+    opacity:1;
+    filter:blur(0);
+    transform:translateY(0) scale(1);
+  }
+}
+
+@keyframes softPanelPulse{
+  0%{
+    filter:blur(0);
+  }
+  45%{
+    filter:blur(5px);
+  }
+  100%{
+    filter:blur(0);
+  }
+}
+
+
+/* Stärkerer Leucht-Effekt für Bereiche nach dem Login */
+.community-card{
+  transition: box-shadow .28s ease, border-color .28s ease, filter .28s ease;
+}
+
+.community-card:hover{
+  border-color: rgba(244,114,182,.55);
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.14),
+    0 0 42px rgba(217,70,239,.28),
+    0 0 95px rgba(168,85,247,.18),
+    0 32px 80px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.24);
+}
+
+.hero,
+.content,
+.post,
+.download-card,
+.video-card,
+.stat div,
+.profile,
+.actions{
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease,
+    background .25s ease,
+    filter .25s ease;
+}
+
+.hero:hover,
+.content:hover,
+.post:hover,
+.download-card:hover,
+.video-card:hover,
+.stat div:hover,
+.profile:hover,
+.actions:hover{
+  transform: translateY(-3px);
+  border-color: rgba(244,114,182,.55);
+  background:
+    linear-gradient(135deg, rgba(168,85,247,.22), rgba(236,72,153,.10)),
+    rgba(255,255,255,.12);
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.16),
+    0 0 24px rgba(217,70,239,.30),
+    0 14px 34px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.16);
+  filter: brightness(1.08) saturate(1.12);
+}
+
+.content.active:hover{
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.18),
+    0 0 32px rgba(217,70,239,.34),
+    0 16px 38px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.hero:hover .social{
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.22),
+    0 0 24px rgba(217,70,239,.25),
+    0 12px 30px rgba(0,0,0,.25);
+}
+
+.download-card:hover .download,
+.video-card:hover .video-btn{
+  border-color: rgba(255,255,255,.70);
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.28),
+    0 0 30px rgba(217,70,239,.48),
+    0 16px 34px rgba(0,0,0,.34);
+}
+
+.stat div:hover span,
+.post:hover strong,
+.download-card:hover .download-name,
+.content:hover h3{
+  text-shadow:
+    0 0 10px rgba(245,208,254,.75),
+    0 0 22px rgba(217,70,239,.42);
+}
+
+
+/* Stat-Karten ruhiger machen + Online-Punkt dauerhaft leuchten */
+.stat div{
+  cursor: default;
+  user-select: none;
+}
+
+.stat div:hover{
+  transform: none;
+  background: rgba(255,255,255,.13);
+  border-color: rgba(255,255,255,.17);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 10px 24px rgba(0,0,0,.16);
+  filter: none;
+}
+
+.stat div:hover span,
+.stat div:hover strong{
+  text-shadow: none;
+}
+
+.stat div:first-child span{
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 8px;
+  border-radius: 999px;
+  font-size: 24px;
+  filter: drop-shadow(0 0 8px rgba(34,197,94,.85));
+  animation: onlineGlow 1.7s ease-in-out infinite;
+}
+
+.stat div:first-child span::before{
+  content:"";
+  position:absolute;
+  inset:6px;
+  border-radius:999px;
+  background: rgba(34,197,94,.18);
+  box-shadow:
+    0 0 14px rgba(34,197,94,.65),
+    0 0 28px rgba(34,197,94,.34);
+  z-index:-1;
+}
+
+@keyframes onlineGlow{
+  0%,100%{
+    filter: drop-shadow(0 0 7px rgba(34,197,94,.70));
+    transform: scale(1);
+  }
+  50%{
+    filter: drop-shadow(0 0 18px rgba(34,197,94,1));
+    transform: scale(1.08);
+  }
+}
+
+
+.top-showcase{display:grid;grid-template-columns:minmax(245px,285px) 1fr;gap:18px;align-items:stretch;margin:18px 0 10px;position:relative;z-index:2}
+.dev-card{position:relative;padding:18px;border-radius:28px;text-align:left;overflow:hidden;background:linear-gradient(135deg,rgba(168,85,247,.28),rgba(59,130,246,.14)),rgba(255,255,255,.08);border:1px solid rgba(216,180,254,.28);box-shadow:0 20px 45px rgba(0,0,0,.28),0 0 28px rgba(217,70,239,.12)}
+.dev-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(236,72,153,.16),transparent 35%),radial-gradient(circle at bottom left,rgba(34,211,238,.10),transparent 40%);pointer-events:none}
+.dev-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(20,8,42,.82);border:1px solid rgba(232,121,249,.42);font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#f5d0fe;box-shadow:0 0 16px rgba(217,70,239,.24)}
+.dev-photo-wrap{position:relative;margin:14px 0 16px;padding:4px;border-radius:24px;overflow:hidden;isolation:isolate;box-shadow:0 0 22px rgba(168,85,247,.20),0 0 34px rgba(34,211,238,.16)}
+.dev-photo-wrap:before{content:"";position:absolute;inset:-65%;background:conic-gradient(from 0deg,rgba(255,0,128,.98),rgba(0,255,255,.98),rgba(149,0,255,.98),rgba(255,170,0,.98),rgba(255,0,128,.98));animation:devFrameSpin 4.2s linear infinite;z-index:0}
+.dev-photo-wrap:after{content:"";position:absolute;inset:4px;border-radius:20px;background:#0b0417;z-index:1}
+.dev-photo{position:relative;z-index:2;display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;border:0;background:#0b0417}
+@keyframes devFrameSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.dev-name{font-size:26px;font-weight:900;line-height:1.05;color:#fff;text-shadow:0 0 14px rgba(217,70,239,.25),0 0 28px rgba(168,85,247,.16);margin-bottom:6px}
+.dev-role{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#c4b5fd;margin-bottom:12px}
+.dev-line{height:1px;border-radius:999px;background:linear-gradient(90deg,rgba(244,114,182,.0),rgba(244,114,182,.95),rgba(34,211,238,.95),rgba(34,211,238,.0));margin:12px 0 14px;box-shadow:0 0 14px rgba(217,70,239,.28)}
+.dev-card p{margin:0;color:rgba(255,255,255,.88);font-size:14px;line-height:1.55}
+.dev-small{display:flex;align-items:center;gap:8px;margin-top:14px;color:rgba(255,255,255,.76);font-size:12px;font-weight:700}
+.dev-dot{width:10px;height:10px;border-radius:999px;background:#22c55e;box-shadow:0 0 10px rgba(34,197,94,.9),0 0 18px rgba(34,197,94,.55);animation:devPulse 1.8s ease-in-out infinite}
+@keyframes devPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.18);opacity:.8}}
+
+@media(max-width:600px){
+.top-showcase{grid-template-columns:1fr}.dev-card{max-width:420px;margin:0 auto}.dev-name{text-align:center}.dev-role,.dev-small,.dev-card p{text-align:center;justify-content:center}
+
+body{padding:16px;align-items:flex-start}.card{padding:29px 22px}.clock{position:relative;top:auto;right:auto;margin:0 auto 16px;width:max-content;text-align:center}.legal-links,.cookie-actions,.actions{flex-direction:column}.nav{grid-template-columns:repeat(2,1fr)}.stat,.grid2{grid-template-columns:1fr}.download-top{flex-direction:column}.action{justify-content:stretch}.download,.video-btn,.cookie-btn,.ghost,.logout{width:100%;max-width:none;min-width:0}.video-card iframe{height:230px}
+}
+
+/* Login-Erfolg Animation + Dashboard Effects */
+.community-effects{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .45s ease;overflow:hidden}
+body.community .community-effects{opacity:1}
+.particle-field,.scanlines{position:absolute;inset:0}
+.particle-field{overflow:hidden}
+.particle{position:absolute;left:var(--left);top:var(--top);width:var(--size);height:var(--size);border-radius:999px;background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(244,114,182,.72) 28%,rgba(168,85,247,.25) 58%,transparent 72%);box-shadow:0 0 12px rgba(217,70,239,.45),0 0 22px rgba(59,130,246,.16);opacity:var(--opacity);filter:blur(.5px);animation:particleFloat var(--duration) linear infinite;animation-delay:var(--delay)}
+@keyframes particleFloat{
+  0%{transform:translate3d(0,16vh,0) scale(.65);opacity:0}
+  10%{opacity:var(--opacity)}
+  55%{transform:translate3d(var(--drift),-10vh,0) scale(1)}
+  100%{transform:translate3d(calc(var(--drift) * -.45),-34vh,0) scale(.72);opacity:0}
+}
+.scanlines{opacity:.18;mix-blend-mode:screen;background:repeating-linear-gradient(to bottom,rgba(255,255,255,.06) 0px,rgba(255,255,255,.06) 1px,transparent 1px,transparent 4px);animation:scanShift 9s linear infinite}
+.scanlines:before{content:"";position:absolute;left:0;right:0;top:-22%;height:180px;background:linear-gradient(to bottom,transparent,rgba(56,189,248,.07),rgba(236,72,153,.10),transparent);filter:blur(18px);animation:scanSweep 7s linear infinite}
+.scanlines:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(236,72,153,.05) 24%,transparent 45%,rgba(56,189,248,.05) 70%,transparent 100%);animation:scanPulse 5.5s ease-in-out infinite}
+@keyframes scanShift{0%{transform:translateY(0)}100%{transform:translateY(20px)}}
+@keyframes scanSweep{0%{transform:translateY(0)}100%{transform:translateY(132vh)}}
+@keyframes scanPulse{0%,100%{opacity:.34}50%{opacity:.68}}
+.login-flash{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;background:radial-gradient(circle at center,rgba(168,85,247,.16),rgba(15,5,35,.62) 45%,rgba(9,0,20,.92) 100%)}
+.login-flash.active{animation:loginFlashShow 1.9s ease forwards}
+.login-flash-inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:28px 34px;border-radius:28px;background:linear-gradient(135deg,rgba(30,10,60,.84),rgba(20,8,42,.64));border:1px solid rgba(232,121,249,.36);box-shadow:0 0 0 1px rgba(255,255,255,.06),0 0 36px rgba(217,70,239,.30),0 26px 70px rgba(0,0,0,.38);backdrop-filter:blur(14px);transform:scale(.88)}
+.login-flash.active .login-flash-inner{animation:welcomePop 1.6s cubic-bezier(.2,.8,.2,1) forwards}
+.login-flash h2{margin:0;font-size:32px;color:#fff;text-shadow:0 0 16px rgba(236,72,153,.48),0 0 34px rgba(168,85,247,.46)}
+.login-flash p{margin:0;color:#f5d0fe;font-size:15px;letter-spacing:.2px;text-align:center}
+.flash-logo{width:78px;height:78px;border-radius:24px;display:grid;place-items:center;font-size:36px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);box-shadow:0 0 24px rgba(217,70,239,.22)}
+.flash-ring{position:absolute;inset:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:999px;border:1px solid rgba(244,114,182,.42);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 32px rgba(217,70,239,.26);animation:ringPulse 1.6s ease-out infinite}
+@keyframes loginFlashShow{0%{opacity:0}14%{opacity:1}78%{opacity:1}100%{opacity:0}}
+@keyframes welcomePop{0%{transform:scale(.82);filter:blur(10px)}22%{transform:scale(1.02);filter:blur(0)}100%{transform:scale(1);filter:blur(0)}}
+@keyframes ringPulse{0%{transform:scale(.75);opacity:.75}100%{transform:scale(1.24);opacity:0}}
+.status-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:default;background:linear-gradient(135deg,rgba(34,197,94,.14),rgba(16,185,129,.08)),rgba(255,255,255,.12)!important;border:1px solid rgba(74,222,128,.28)!important;box-shadow:0 0 0 1px rgba(74,222,128,.06),0 0 22px rgba(34,197,94,.14),0 12px 24px rgba(0,0,0,.18)}
+.status-orb-wrap{display:grid;place-items:center;width:42px;height:42px;border-radius:999px;background:rgba(10,20,12,.38);border:1px solid rgba(134,239,172,.18)}
+.status-orb{width:14px;height:14px;border-radius:999px;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,.95),0 0 22px rgba(74,222,128,.75),0 0 40px rgba(34,197,94,.45);animation:onlinePulse 1.7s ease-in-out infinite}
+.online-card strong{letter-spacing:.2px}
+.online-card small{color:rgba(220,252,231,.84)}
+@keyframes onlinePulse{0%,100%{transform:scale(.95);filter:brightness(1)}50%{transform:scale(1.16);filter:brightness(1.25)}}
+
+
+/* Animierter Rainbow-Mauscursor nach Login */
+body.community{
+  cursor: none;
+}
+
+body.community a,
+body.community button,
+body.community input,
+body.community .link,
+body.community .back{
+  cursor: none;
+}
+
+.rainbow-cursor{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate3d(-50px, -50px, 0);
+  background:
+    radial-gradient(circle, rgba(255,255,255,.95) 0%, rgba(255,255,255,.82) 18%, transparent 42%),
+    conic-gradient(from 0deg, #ff0080, #00e5ff, #9d00ff, #00ff88, #ffea00, #ff0080);
+  box-shadow:
+    0 0 14px rgba(255,0,128,.75),
+    0 0 28px rgba(0,229,255,.48),
+    0 0 42px rgba(157,0,255,.35);
+  mix-blend-mode: screen;
+  transition:
+    opacity .22s ease,
+    width .18s ease,
+    height .18s ease,
+    filter .18s ease;
+  animation: cursorSpin 2.2s linear infinite;
+}
+
+.rainbow-cursor.active{
+  opacity: 1;
+}
+
+.rainbow-cursor.clicking{
+  width: 28px;
+  height: 28px;
+  filter: brightness(1.35) saturate(1.35);
+}
+
+.rainbow-cursor.hovering{
+  width: 34px;
+  height: 34px;
+  box-shadow:
+    0 0 18px rgba(255,0,128,.85),
+    0 0 34px rgba(0,229,255,.58),
+    0 0 58px rgba(157,0,255,.45);
+}
+
+.cursor-trail{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transform: translate3d(-50px, -50px, 0);
+  background: conic-gradient(from 0deg, #ff0080, #00e5ff, #9d00ff, #00ff88, #ffea00, #ff0080);
+  box-shadow:
+    0 0 12px rgba(255,0,128,.46),
+    0 0 22px rgba(0,229,255,.30);
+  mix-blend-mode: screen;
+  filter: blur(.2px);
+}
+
+.cursor-trail.active{
+  opacity: .62;
+}
+
+@keyframes cursorSpin{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(360deg)}
+}
+
+@media (pointer: coarse){
+  body.community,
+  body.community a,
+  body.community button,
+  body.community input,
+  body.community .link,
+  body.community .back{
+    cursor: auto;
+  }
+
+  .rainbow-cursor,
+  .cursor-trail{
+    display:none;
+  }
+}
+
+
+.protected-download-card{
+  border-color: rgba(34,211,238,.28);
+  background:
+    linear-gradient(135deg, rgba(34,211,238,.13), rgba(168,85,247,.12)),
+    rgba(255,255,255,.10);
+}
+
+.protected-download-card:hover{
+  border-color: rgba(34,211,238,.62);
+  box-shadow:
+    0 0 0 1px rgba(34,211,238,.18),
+    0 0 30px rgba(34,211,238,.24),
+    0 16px 34px rgba(0,0,0,.32);
+}
+
+
+/* Schönes Passwort-Modal für geschützte Downloads */
+.password-modal{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:
+    radial-gradient(circle at center, rgba(34,211,238,.12), transparent 35%),
+    rgba(5,0,18,.72);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+
+.password-modal.active{
+  display:flex;
+  animation:modalFade .22s ease both;
+}
+
+.password-box{
+  position:relative;
+  width:min(430px, 94vw);
+  padding:28px;
+  border-radius:28px;
+  background:
+    linear-gradient(135deg, rgba(30,10,60,.96), rgba(20,8,42,.92)),
+    radial-gradient(circle at top right, rgba(34,211,238,.16), transparent 38%);
+  border:1px solid rgba(34,211,238,.34);
+  box-shadow:
+    0 0 0 1px rgba(244,114,182,.10),
+    0 0 42px rgba(34,211,238,.22),
+    0 0 80px rgba(217,70,239,.16),
+    0 30px 80px rgba(0,0,0,.55);
+  overflow:hidden;
+  animation:modalPop .28s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.password-box::before{
+  content:"";
+  position:absolute;
+  top:-70%;
+  left:-90%;
+  width:70%;
+  height:240%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.34), transparent);
+  transform:rotate(24deg);
+  animation:modalShine 4.5s ease-in-out infinite;
+  pointer-events:none;
+}
+
+.password-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  color:#fff;
+  background:rgba(255,255,255,.10);
+  cursor:pointer;
+  font-size:18px;
+  font-weight:900;
+  transition:.22s ease;
+  z-index:2;
+}
+
+.password-close:hover{
+  transform:scale(1.08);
+  background:rgba(255,255,255,.18);
+  box-shadow:0 0 18px rgba(244,114,182,.28);
+}
+
+.password-icon{
+  width:72px;
+  height:72px;
+  margin:0 auto 14px;
+  display:grid;
+  place-items:center;
+  border-radius:24px;
+  font-size:32px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(34,211,238,.28);
+  box-shadow:
+    0 0 22px rgba(34,211,238,.22),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.password-box h3{
+  margin:0 0 8px;
+  text-align:center;
+  color:#f5d0fe;
+  text-shadow:0 0 14px rgba(217,70,239,.55);
+  font-size:24px;
+}
+
+.password-box p{
+  margin:0 0 18px;
+  text-align:center;
+  color:rgba(255,255,255,.82);
+  line-height:1.45;
+  font-size:14px;
+}
+
+.password-field{
+  position:relative;
+  margin-bottom:12px;
+}
+
+.password-field input{
+  padding:15px 48px 15px 16px;
+  border-radius:18px;
+  border:1px solid rgba(34,211,238,.28);
+  background:rgba(255,255,255,.12);
+  color:white;
+  width:100%;
+  outline:none;
+  font-size:15px;
+  font-weight:700;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 0 18px rgba(34,211,238,.08);
+}
+
+.password-field input:focus{
+  border-color:rgba(34,211,238,.72);
+  box-shadow:
+    0 0 0 4px rgba(34,211,238,.10),
+    0 0 24px rgba(34,211,238,.18);
+}
+
+.password-eye{
+  position:absolute;
+  top:50%;
+  right:10px;
+  transform:translateY(-50%);
+  width:36px;
+  height:36px;
+  border:0;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  font-size:17px;
+}
+
+.password-modal-actions{
+  display:flex;
+  gap:10px;
+  margin-top:16px;
+}
+
+.password-submit,
+.password-cancel{
+  flex:1;
+  min-width:0;
+  padding:13px 16px;
+  border-radius:999px;
+  border:1px solid rgba(232,121,249,.42);
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+  transition:.22s ease;
+}
+
+.password-submit{
+  background:linear-gradient(135deg, rgba(34,211,238,.36), rgba(168,85,247,.34));
+  box-shadow:0 0 22px rgba(34,211,238,.18);
+}
+
+.password-cancel{
+  background:rgba(255,255,255,.10);
+}
+
+.password-submit:hover,
+.password-cancel:hover{
+  transform:translateY(-2px);
+  border-color:rgba(244,114,182,.74);
+  box-shadow:0 0 24px rgba(217,70,239,.28), 0 12px 28px rgba(0,0,0,.22);
+}
+
+.password-message{
+  min-height:22px;
+  margin-top:8px;
+  text-align:center;
+  font-size:14px;
+  font-weight:850;
+  color:#fca5a5;
+}
+
+.password-message.success{
+  color:#86efac;
+}
+
+@keyframes modalFade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes modalPop{
+  from{opacity:0; transform:translateY(18px) scale(.94); filter:blur(8px)}
+  to{opacity:1; transform:translateY(0) scale(1); filter:blur(0)}
+}
+
+@keyframes modalShine{
+  0%{left:-90%}
+  45%{left:130%}
+  100%{left:130%}
+}
+
+@media(max-width:600px){
+  .password-box{padding:24px 20px}
+  .password-modal-actions{flex-direction:column}
+}
+
+
+/* Screenshot-Galerie */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:14px;
+  margin-top:16px;
+}
+
+.gallery-card{
+  position:relative;
+  overflow:hidden;
+  min-height:220px;
+  border-radius:22px;
+  background:
+    linear-gradient(135deg, rgba(168,85,247,.18), rgba(34,211,238,.08)),
+    rgba(255,255,255,.08);
+  border:1px solid rgba(216,180,254,.22);
+  box-shadow:
+    0 14px 32px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.10);
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease,
+    filter .25s ease;
+}
+
+.gallery-card:hover{
+  transform:translateY(-4px) scale(1.012);
+  border-color:rgba(34,211,238,.58);
+  box-shadow:
+    0 0 0 1px rgba(34,211,238,.16),
+    0 0 32px rgba(34,211,238,.24),
+    0 18px 38px rgba(0,0,0,.32);
+  filter:brightness(1.08) saturate(1.12);
+}
+
+.gallery-card img{
+  width:100%;
+  height:220px;
+  display:block;
+  object-fit:cover;
+  border-radius:inherit;
+}
+
+.gallery-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to top, rgba(5,0,18,.72), transparent 48%),
+    radial-gradient(circle at top right, rgba(236,72,153,.18), transparent 36%);
+  pointer-events:none;
+}
+
+.gallery-caption{
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:12px;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.gallery-caption strong{
+  color:#fff;
+  text-shadow:0 0 14px rgba(217,70,239,.42);
+}
+
+.gallery-caption span{
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  color:#ecfeff;
+  background:rgba(34,211,238,.16);
+  border:1px solid rgba(34,211,238,.26);
+}
+
+.gallery-note{
+  margin-top:14px;
+  padding:13px 14px;
+  border-radius:18px;
+  color:rgba(255,255,255,.82);
+  background:linear-gradient(135deg, rgba(168,85,247,.13), rgba(34,211,238,.07)), rgba(0,0,0,.18);
+  border:1px solid rgba(216,180,254,.18);
+  font-size:13px;
+  line-height:1.45;
+  text-align:center;
+  font-weight:750;
+}
+
+.gallery-card.is-missing{
+  display:grid;
+  place-items:center;
+  min-height:220px;
+  padding:18px;
+  text-align:center;
+}
+
+.gallery-card.is-missing img{
+  display:none;
+}
+
+.gallery-missing-text{
+  position:relative;
+  z-index:2;
+  color:rgba(255,255,255,.78);
+  line-height:1.45;
+  font-weight:800;
+}
+
+@media(max-width:600px){
+  .gallery-grid{
+    grid-template-columns:1fr;
+  }
+
+  .gallery-card img{
+    height:210px;
+  }
+}
+
+
+.private-gallery-section{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+
+.private-gallery-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:8px;
+}
+
+.private-gallery-head h4{
+  margin:0;
+  font-size:18px;
+  color:#f5d0fe;
+  text-shadow:0 0 14px rgba(217,70,239,.35);
+}
+
+.private-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  background:rgba(34,211,238,.14);
+  border:1px solid rgba(34,211,238,.28);
+  color:#ecfeff;
+  white-space:nowrap;
+}
+
+.gallery-card.private-photo{
+  border-color:rgba(34,211,238,.25);
+  background:
+    linear-gradient(135deg, rgba(34,211,238,.14), rgba(168,85,247,.10)),
+    rgba(255,255,255,.08);
+}
+
+.gallery-card.private-photo:hover{
+  border-color:rgba(34,211,238,.62);
+  box-shadow:
+    0 0 0 1px rgba(34,211,238,.18),
+    0 0 34px rgba(34,211,238,.26),
+    0 18px 38px rgba(0,0,0,.32);
+}
+
+
+/* Download-Status: leicht änderbar online/offline */
+.download-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.download-side{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:8px;
+  flex:0 0 auto;
+}
+
+.download-status{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.3px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(8px);
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+  text-transform:uppercase;
+  user-select:none;
+}
+
+.status-dot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  flex:0 0 11px;
+}
+
+/* Später einfach class="download-status online" setzen */
+.download-status.online{
+  color:#bbf7d0;
+  border-color:rgba(34,197,94,.45);
+  background:rgba(34,197,94,.12);
+  box-shadow:0 0 18px rgba(34,197,94,.18),0 10px 20px rgba(0,0,0,.18);
+}
+
+.download-status.online .status-dot{
+  background:#22c55e;
+  box-shadow:
+    0 0 6px rgba(34,197,94,.95),
+    0 0 14px rgba(34,197,94,.85),
+    0 0 26px rgba(34,197,94,.65);
+  animation:onlineGlow 1.6s ease-in-out infinite;
+}
+
+/* Aktuell überall offline/rot */
+.download-status.offline{
+  color:#fecaca;
+  border-color:rgba(239,68,68,.45);
+  background:rgba(239,68,68,.12);
+  box-shadow:0 0 18px rgba(239,68,68,.18),0 10px 20px rgba(0,0,0,.18);
+}
+
+.download-status.offline .status-dot{
+  background:#ef4444;
+  box-shadow:
+    0 0 6px rgba(239,68,68,.95),
+    0 0 14px rgba(239,68,68,.85),
+    0 0 26px rgba(239,68,68,.65);
+  animation:offlinePulse 1.2s ease-in-out infinite;
+}
+
+@keyframes onlineGlow{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.18);opacity:.82}
+}
+
+@keyframes offlinePulse{
+  0%{
+    transform:scale(1);
+    opacity:1;
+    box-shadow:
+      0 0 6px rgba(239,68,68,.95),
+      0 0 14px rgba(239,68,68,.85),
+      0 0 26px rgba(239,68,68,.65);
+  }
+  50%{
+    transform:scale(1.28);
+    opacity:.78;
+    box-shadow:
+      0 0 10px rgba(239,68,68,1),
+      0 0 22px rgba(239,68,68,.95),
+      0 0 38px rgba(239,68,68,.75);
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+    box-shadow:
+      0 0 6px rgba(239,68,68,.95),
+      0 0 14px rgba(239,68,68,.85),
+      0 0 26px rgba(239,68,68,.65);
+  }
+}
+
+@media(max-width:600px){
+  .download-side{
+    align-items:flex-start;
+    width:100%;
+  }
+}
+
+</style>
+</head>
+
+<body>
+<div class="community-effects" id="communityEffects" aria-hidden="true">
+  <div class="particle-field" id="particleField"></div>
+  <div class="scanlines"></div>
+</div>
+
+<div class="login-flash" id="loginFlash" aria-hidden="true">
+  <div class="login-flash-inner">
+    <div class="flash-ring"></div>
+    <div class="flash-logo">🎮</div>
+    <h2 id="welcomeHeadline">Willkommen zurück</h2>
+    <p id="welcomeSubline">Login erfolgreich</p>
+  </div>
+</div>
+
+
+<div class="rainbow-cursor" id="rainbowCursor" aria-hidden="true"></div>
+<div class="cursor-trail" aria-hidden="true"></div>
+<div class="cursor-trail" aria-hidden="true"></div>
+<div class="cursor-trail" aria-hidden="true"></div>
+<div class="cursor-trail" aria-hidden="true"></div>
+<div class="cursor-trail" aria-hidden="true"></div>
+
+<main class="app">
+
+<section class="card" id="authCard">
+  <div class="brand">
+    <div class="logo">🎮</div>
+    <h1 id="title">Willkommen</h1>
+    <div class="sub" id="subtitle">Melde dich an oder erstelle ein Konto.</div>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" type="button" onclick="showForm('login')">Anmelden</button>
+    <button class="tab" type="button" onclick="showForm('register')">Registrieren</button>
+  </div>
+
+  <form class="form active" id="loginForm" onsubmit="login(event)">
+    <div class="group">
+      <label for="loginEmail">E-Mail</label>
+      <div class="wrap"><input id="loginEmail" type="email" placeholder="deine@email.de" required /></div>
+    </div>
+    <div class="group">
+      <label for="loginPassword">Passwort</label>
+      <div class="wrap">
+        <input id="loginPassword" type="password" placeholder="Dein Passwort" required />
+        <button type="button" class="eye" onclick="togglePassword('loginPassword', this)">👁</button>
+      </div>
+    </div>
+    <button class="btn" type="submit"><span>Einloggen</span></button>
+    <a class="link" onclick="showForm('forgot')">Passwort zurücksetzen</a>
+    <div class="legal-links">
+      <button type="button" onclick="showForm('impressum')"><span>Impressum</span></button>
+      <button type="button" onclick="showForm('datenschutz')"><span>Datenschutz</span></button>
+    </div>
+    <div class="msg" id="loginMessage"></div>
+    <div class="note">Noch kein Konto? Erstelle dir über „Registrieren“ einen Account.</div>
+  </form>
+
+  <form class="form" id="registerForm" onsubmit="register(event)">
+    <div class="group">
+      <label for="registerUsername">Benutzername</label>
+      <div class="wrap"><input id="registerUsername" type="text" placeholder="Neuer Benutzername" required /></div>
+    </div>
+    <div class="group">
+      <label for="registerEmail">E-Mail</label>
+      <div class="wrap"><input id="registerEmail" type="email" placeholder="name@example.de" required /></div>
+    </div>
+    <div class="group">
+      <label for="registerPassword">Passwort</label>
+      <div class="wrap">
+        <input id="registerPassword" type="password" placeholder="Mindestens 6 Zeichen" required />
+        <button type="button" class="eye" onclick="togglePassword('registerPassword', this)">👁</button>
+      </div>
+    </div>
+    <div class="group">
+      <label for="registerPasswordRepeat">Passwort wiederholen</label>
+      <div class="wrap">
+        <input id="registerPasswordRepeat" type="password" placeholder="Passwort wiederholen" required />
+        <button type="button" class="eye" onclick="togglePassword('registerPasswordRepeat', this)">👁</button>
+      </div>
+    </div>
+    <button class="btn" type="submit"><span>Konto erstellen</span></button>
+    <div class="legal-links">
+      <button type="button" onclick="showForm('impressum')"><span>Impressum</span></button>
+      <button type="button" onclick="showForm('datenschutz')"><span>Datenschutz</span></button>
+    </div>
+    <div class="msg" id="registerMessage"></div>
+    <div class="note">Registrierung und Login laufen über Firebase Authentication.</div>
+  </form>
+
+  <form class="form" id="forgotForm" onsubmit="resetPassword(event)">
+    <div class="group">
+      <label for="forgotEmail">E-Mail</label>
+      <div class="wrap"><input id="forgotEmail" type="email" placeholder="deine@email.de" required /></div>
+    </div>
+    <button class="btn" type="submit"><span>Reset-Mail senden</span></button>
+    <span class="back" onclick="showForm('login')">Zurück zum Login</span>
+    <div class="msg" id="forgotMessage"></div>
+  </form>
+
+  <div class="form" id="impressumForm">
+    <div class="legal-box">
+      <h2>Impressum</h2>
+      <p><strong>Angaben zum Anbieter dieser Website</strong></p>
+      <p>Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau<br />Deutschland</p>
+      <p><strong>Kontakt</strong><br />E-Mail: gigarazor.bot@web.de</p>
+      <p><strong>Verantwortlich für den Inhalt</strong><br />Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau</p>
+      <p><strong>Hinweis zur Community</strong><br />Diese Website dient dem Aufbau und Betrieb der privaten Gaming Community GigarazorLp. Die Nutzung ist nur für registrierte oder eingeladene Mitglieder vorgesehen.</p>
+      <p><strong>Externe Plattformen und Dienste</strong><br />Diese Website kann externe Dienste und Plattformen nutzen oder verlinken, insbesondere Firebase Authentication, Discord, YouTube und Google Drive. Für Inhalte und Datenverarbeitung auf externen Plattformen sind auch die jeweiligen Anbieter verantwortlich.</p>
+      <p><strong>Haftung für Inhalte</strong><br />Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.</p>
+      <p><strong>Haftung für Links</strong><br />Diese Website kann Links zu externen Websites enthalten. Auf deren Inhalte habe ich keinen Einfluss. Für die Inhalte externer Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+      <p><strong>Urheberrecht</strong><br />Die auf dieser Website erstellten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Beiträge Dritter werden als solche gekennzeichnet.</p>
+      <p><strong>Hinweis zu Screenshots, KI-Bildern und privaten Fotos</strong><br />Auf dieser Website können eigene Gaming-Screenshots, KI-generierte Bilder und eigene private Fotos angezeigt werden. Marken, Spielnamen, Logos, Fahrzeuge, Charaktere und sonstige Spielinhalte gehören den jeweiligen Rechteinhabern. Diese Website ist ein privates Community-Projekt und steht in keiner offiziellen Verbindung zu Spieleherstellern, Plattformbetreibern, Markeninhabern oder sonstigen Rechteinhabern. KI-generierte Bilder und Fan-Inhalte werden nicht als offizielle Inhalte von Spieleherstellern, Plattformen oder Marken dargestellt.</p><p><strong>Hinweis zu Bildmaterial</strong><br />Verwendete Bilder sollten nach Möglichkeit eigene Screenshots, eigene Fotos oder selbst erstellte beziehungsweise KI-generierte Bilder sein. Sollten Rechte Dritter betroffen sein, bitte ich um einen kurzen Hinweis per E-Mail, damit die betreffenden Inhalte geprüft und gegebenenfalls entfernt werden können.</p>
+    </div>
+    <span class="back" onclick="showForm('login')">Zurück zum Login</span>
+  </div>
+
+  <div class="form" id="datenschutzForm">
+    <div class="legal-box">
+      <h2>Datenschutzerklärung</h2>
+      <p>Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten bei der Nutzung dieser Website verarbeitet werden.</p>
+
+      <h3>1. Verantwortlicher</h3>
+      <p>Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau<br />Deutschland<br />E-Mail: gigarazor.bot@web.de</p>
+
+      <h3>2. Zweck der Website</h3>
+      <p>Diese Website dient dem Aufbau und Betrieb der privaten Gaming Community GigarazorLp. Nutzer können sich registrieren, anmelden und nach dem Login Community-Inhalte sehen, darunter News, Downloads, Events, YouTube-Videos und eine Screenshot-Galerie.</p>
+
+      <h3>3. Registrierung und Login mit Firebase Authentication</h3>
+      <p>Für Registrierung, Login, Sitzungsverwaltung und Passwort-Zurücksetzung verwendet diese Website Firebase Authentication. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+      <p>Bei Registrierung und Anmeldung können insbesondere folgende Daten verarbeitet werden:</p>
+      <ul>
+        <li>E-Mail-Adresse</li>
+        <li>Benutzername beziehungsweise Anzeigename</li>
+        <li>Firebase-Nutzer-ID</li>
+        <li>technische Authentifizierungs- und Sitzungsdaten</li>
+        <li>IP-Adresse und technische Zugriffsdaten, soweit für den Dienst erforderlich</li>
+      </ul>
+      <p>Passwörter werden nicht lokal im Quellcode oder im Browser als Klartext gespeichert. Die Authentifizierung und Passwort-Zurücksetzung erfolgt über Firebase Authentication.</p>
+
+      <h3>4. Cookies und lokale Speicherung</h3>
+      <p>Diese Website nutzt technisch notwendige lokale Speicherungen, damit Login-Funktionen, Sitzungsverwaltung und Datenschutzeinstellungen funktionieren können.</p>
+      <ul>
+        <li><strong>Firebase Authentication:</strong> Speicherung von Authentifizierungs- und Sitzungsinformationen im Browser</li>
+        <li><strong>youtubeConsent:</strong> lokale Speicherung deiner YouTube-Auswahl</li>
+        <li><strong>youtubeConsentDate:</strong> lokale Speicherung des Zeitpunkts deiner YouTube-Auswahl</li>
+      </ul>
+      <p>Diese technisch notwendigen Speicherungen dienen der Bereitstellung der Website und der Login-Funktionen. Die freiwillige YouTube-Einwilligung wird erst gespeichert, wenn du YouTube erlaubst oder ablehnst.</p>
+
+      <h3>5. Externe Inhalte: YouTube</h3>
+      <p>Diese Website kann Videos der Plattform YouTube einbinden. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+      <p>YouTube-Videos werden nicht automatisch geladen. Erst wenn du der Anzeige von YouTube-Videos zustimmst, wird eine Verbindung zu YouTube beziehungsweise Google hergestellt. Dabei können personenbezogene Daten wie IP-Adresse, Browserinformationen, Geräteinformationen und Informationen über den Besuch dieser Website an Google übermittelt werden.</p>
+      <p>Für die Einbindung wird nach Möglichkeit der erweiterte Datenschutzmodus über die Domain youtube-nocookie.com verwendet. Trotzdem kann beim Abspielen eines Videos eine Datenübertragung an Google erfolgen.</p>
+      <p>Du kannst deine Auswahl über „YouTube-Einstellungen ändern“ erneut öffnen oder durch Löschen des Browser-Speichers zurücksetzen.</p>
+
+      <h3>6. Externe Links: Discord, YouTube und Google Drive</h3>
+      <p>Diese Website kann Links zu Discord, YouTube, Google Drive oder anderen externen Plattformen enthalten. Beim Anklicken dieser Links verlässt du diese Website. Es gelten dann die Datenschutzbestimmungen und Nutzungsbedingungen des jeweiligen Anbieters.</p>
+
+      <h3>7. Download-Links über Google Drive</h3>
+      <p>Download-Links auf dieser Website können zu Dateien führen, die über Google Drive bereitgestellt werden. Google Drive wird erst geöffnet, wenn du aktiv auf einen Download-Link klickst. Dabei können Daten wie IP-Adresse, Browserinformationen, Geräteinformationen und Informationen über den Zugriff an Google übertragen werden. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+      <p>Die Freigabe und Zugriffskontrolle der Dateien erfolgt über Google Drive. Es gelten zusätzlich die Datenschutzbestimmungen und Nutzungsbedingungen von Google.</p>
+
+      <h3>8. Screenshot-Galerie, KI-Bilder und private Fotos</h3>
+      <p>Die Galerie zeigt statische Bilddateien, die direkt auf dieser Website bereitgestellt werden. Dabei können eigene Gaming-Screenshots, KI-generierte Bilder und eigene private Fotos angezeigt werden.</p>
+      <p>Derzeit gibt es keine Upload-Funktion für Nutzer. Besucher können keine eigenen Bilder über diese Website hochladen. Wenn später Uploads, Profilbilder, Kommentare oder eine Datenbank-Funktion eingebaut werden, muss diese Datenschutzerklärung entsprechend erweitert werden.</p>
+      <p>Beim bloßen Anzeigen der Galerie werden durch diese Website keine zusätzlichen Tracking- oder Analyse-Dienste eingesetzt. Die Bilder werden als normale Website-Dateien geladen.</p>
+
+      <h3>9. Kontaktaufnahme per E-Mail</h3>
+      <p>Wenn du per E-Mail Kontakt mit mir aufnimmst, wird deine E-Mail inklusive der darin angegebenen Daten zwecks Bearbeitung der Anfrage gespeichert. Diese Daten gebe ich nicht ohne deine Einwilligung weiter. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO, also dem berechtigten Interesse an der Bearbeitung von Anfragen.</p>
+
+      <h3>10. Nicht verwendete Dienste</h3>
+      <p>Diese Website verwendet derzeit kein Google Analytics, keinen Google Tag Manager, keine Google Fonts, kein Werbe-Tracking und keine Marketing-Cookies.</p>
+
+      <h3>11. Rechtsgrundlagen</h3>
+      <p>Die Verarbeitung im Rahmen von Registrierung, Login und Community-Zugang erfolgt, soweit erforderlich, auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO. Technisch notwendige Verarbeitungen können auf Art. 6 Abs. 1 lit. f DSGVO beruhen. Die Einbindung von YouTube-Videos erfolgt nur nach deiner Einwilligung.</p>
+
+      <h3>12. Speicherdauer</h3>
+      <p>Accountdaten bleiben gespeichert, solange das Nutzerkonto besteht oder gesetzliche Aufbewahrungspflichten entgegenstehen. Lokal gespeicherte Einstellungen bleiben gespeichert, bis du sie löschst oder den Browser-Speicher leerst.</p>
+
+      <h3>13. Rechte der betroffenen Personen</h3>
+      <p>Betroffene Personen haben nach der DSGVO insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen.</p>
+
+      <h3>14. Beschwerderecht</h3>
+      <p>Betroffene Personen haben das Recht, sich bei einer zuständigen Datenschutzaufsichtsbehörde zu beschweren.</p>
+
+      <h3>15. Hinweis</h3>
+      <p>Diese Vorlage ersetzt keine anwaltliche Prüfung. Sobald die Website öffentlich betrieben wird, Hosting, Datenbank, Analyse-Tools, Kontaktformulare oder weitere Dienste hinzukommen, muss diese Datenschutzerklärung geprüft und angepasst werden.</p>
+    </div>
+    <span class="back" onclick="showForm('login')">Zurück zum Login</span>
+  </div>
+</section>
+
+<section class="card community-card" id="dashboard">
+  <div class="clock">
+    <div class="time" id="clockTime">--:--:--</div>
+    <div class="date" id="clockDate">--.--.----</div>
+  </div>
+
+  <div class="head">
+    <div class="logo">🎮</div>
+    <h2 class="neon">Gaming Community GigarazorLp</h2>
+    <div class="pill" id="userPill">👤 Benutzer</div>
+
+    <div class="top-showcase">
+      <div class="dev-card">
+        <div class="dev-badge">⚡ DEV Spotlight</div>
+        <div class="dev-photo-wrap">
+          <img class="dev-photo" src="dev-gigarazorlp.png" alt="DEV GigarazorLp Profilbild" />
+        </div>
+        <div class="dev-name">DEV GigarazorLp</div>
+        <div class="dev-role">Creator • Community Owner</div>
+        <div class="dev-line"></div>
+        <p>Willkommen in der Community.</p>
+        <div class="dev-small"><span class="dev-dot"></span><span>Online • Ready to play</span></div>
+      </div>
+
+      <div class="hero">
+        <p>Willkommen in der privaten Gaming Community GigarazorLp. Hier findest du News, Downloads, Videos, Events, Server-Infos, Galerien und unsere Community-Regeln.</p>
+        <div class="grid2">
+          <a class="social discord" href="https://discord.com/invite/mBzEN5S5Db" target="_blank" rel="noopener noreferrer">💬 Discord beitreten</a>
+          <a class="social youtube" href="https://www.youtube.com/@gigarazorlp1911" target="_blank" rel="noopener noreferrer">▶ YouTube öffnen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button type="button" onclick="showCommunityTab('home')" class="active">Home</button>
+    <button type="button" onclick="showCommunityTab('news')">News</button>
+    <button type="button" onclick="showCommunityTab('downloads')"><span>Downloads</span></button>
+    <button type="button" onclick="showCommunityTab('videos')"><span>Videos</span></button>
+    <button type="button" onclick="showCommunityTab('gallery')"><span>Galerie</span></button>
+    <button type="button" onclick="showCommunityTab('events')">Events</button>
+    <button type="button" onclick="showCommunityTab('rules')">Regeln</button>
+  </div>
+
+  <div class="content active" id="communityHome">
+    <h3>Willkommen, Gamer 👋</h3>
+    <p>Diese Community ist ein privater Treffpunkt für gemeinsame Gaming-Abende, entspannte Runden, Voice-Chat, Events und neue Mitspieler.</p>
+    <div class="stat">
+      <div class="status-card online-card" aria-label="Community online Status">
+        <span class="status-orb-wrap"><span class="status-orb"></span></span>
+        <strong>Community</strong>
+        <small>Echtzeit online</small>
+      </div>
+      <div><span>🔐</span><strong>Login</strong><small>Firebase Auth</small></div>
+      <div><span>▶️</span><strong>Videos</strong><small>Mit Zustimmung</small></div>
+    </div>
+    <div class="box">
+      <span class="tag">Privat</span>
+      <strong>Unser Ziel</strong>
+      <p>Eine entspannte Community ohne Stress, ohne toxisches Verhalten und mit fairen Mitspielern. Später können wir Firestore für Profile, Rollen, News und Admin-Funktionen anbinden.</p>
+    </div>
+  </div>
+
+  <div class="content" id="communityNews">
+    <h3>News & Ankündigungen</h3>
+    <div class="post"><strong>🔥 Community ist gestartet</strong><p>Unser privater Gaming-Hub ist online. Registrierung und Login laufen jetzt über Firebase Authentication.</p></div>
+    <div class="post"><strong>🎯 Geplant</strong><p>Firestore-Profile, Rollen, News-Verwaltung, Downloads aus Storage und ein Adminbereich.</p></div>
+    <div class="post"><strong>🛡️ Fairplay zuerst</strong><p>Wir wollen eine Community mit Respekt, Spaß und klaren Regeln.</p></div>
+  </div>
+
+  <div class="content" id="communityDownloads">
+    <h3>Download-Bereich</h3>
+    <p>Hier kannst du Launcher, Mods, Configs, Tools oder Community-Dateien anbieten. Die Links können direkt zu Google Drive führen.</p>
+
+    <div class="download-card">
+      <div class="download-top">
+        <div>
+          <div class="download-name">Community Launcher</div>
+          <p>Launcher für Community-News, Server-Verbindung und Updates.</p>
+        </div>
+
+        <div class="download-side">
+          <div class="version">v1.0.0</div>
+          <!-- Status ändern: offline = rot, online = grün -->
+          <div class="download-status offline">
+            <span class="status-dot"></span>
+            <span>Offline</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="meta">Windows</span>
+      <span class="meta">64-bit</span>
+      <span class="meta">EXE</span>
+
+      <div class="action">
+        <a class="download" href="https://drive.google.com/DEIN-LAUNCHER-LINK" target="_blank" rel="noopener noreferrer">
+          <span>Launcher herunterladen</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="download-card">
+      <div class="download-top">
+        <div>
+          <div class="download-name">Server Config Pack</div>
+          <p>Configs, Einstellungen oder Community-Pakete.</p>
+        </div>
+
+        <div class="download-side">
+          <div class="version">v0.3.2</div>
+          <!-- Status ändern: offline = rot, online = grün -->
+          <div class="download-status offline">
+            <span class="status-dot"></span>
+            <span>Offline</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="meta">ZIP</span>
+      <span class="meta">Configs</span>
+      <span class="meta">Server</span>
+
+      <div class="action">
+        <a class="download" href="https://drive.google.com/DEIN-CONFIG-PACK-LINK" target="_blank" rel="noopener noreferrer">
+          <span>Config Pack herunterladen</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="download-card protected-download-card">
+      <div class="download-top">
+        <div>
+          <div class="download-name">Protected Shadow Pack</div>
+          <p>Geschützter Download mit Passwort-Prüfung über SHA-256 Hash.</p>
+        </div>
+
+        <div class="download-side">
+          <div class="version">v1.0</div>
+          <!-- Status ändern: offline = rot, online = grün -->
+          <div class="download-status offline">
+            <span class="status-dot"></span>
+            <span>Offline</span>
+          </div>
+        </div>
+      </div>
+
+      <span class="meta">ZIP</span>
+      <span class="meta">Passwort</span>
+      <span class="meta">SHA-256</span>
+
+      <div class="action">
+        <button class="download" type="button" onclick="protectedDownload('https://drive.google.com/DEIN-SHADOW-PACK-LINK', '0bb09d80600eec3eb9d7793a6f859bedde2a2d83899b70bd78e961ed674b32f4')">
+          <span>Geschützten Download öffnen</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content" id="communityVideos">
+    <h3>YouTube-Videos</h3>
+    <p>Hier findest du Trailer, Tutorials oder Community-Clips. YouTube wird erst geladen, wenn du zugestimmt hast.</p>
+
+    <div class="video-card" data-video-id="dQw4w9WgXcQ" data-video-title="Community Trailer">
+      <div class="video-placeholder">
+        <div>
+          <div class="video-icon">▶</div>
+          <strong>Community Trailer</strong>
+          <p>Dieses Video wird von YouTube geladen. Dabei können Daten an Google/YouTube übertragen werden.</p>
+          <button type="button" class="video-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card" data-video-id="dQw4w9WgXcQ" data-video-title="Gameplay Highlights">
+      <div class="video-placeholder">
+        <div>
+          <div class="video-icon">▶</div>
+          <strong>Gameplay Highlights</strong>
+          <p>Dieses Video wird von YouTube geladen. Dabei können Daten an Google/YouTube übertragen werden.</p>
+          <button type="button" class="video-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center;margin-top:14px">
+      <button type="button" class="ghost" onclick="openCookieSettings()"><span>YouTube-Einstellungen ändern</span></button>
+    </p>
+  </div>
+
+
+  <div class="content" id="communityGallery">
+    <!-- Screenshot-Galerie: Diese Bilder liegen neben der index.html und heißen 1.jpg bis 10.jpg -->
+    <div class="gallery-grid" id="galleryGrid"></div>
+
+    <div class="private-gallery-section">
+      <!-- Private Bilder-Galerie: Diese Bilder liegen neben der index.html und heißen pr1.jpg bis pr10.jpg -->
+      <div class="gallery-grid" id="privateGalleryGrid"></div>
+    </div>
+  </div>
+
+  <div class="content" id="communityEvents">
+    <h3>Events</h3>
+    <div class="post"><span class="tag">Freitag</span><strong>Community Night</strong><p>20:00 Uhr · Voice-Chat · Open Games</p></div>
+    <div class="post"><span class="tag">Samstag</span><strong>Ranked / Squad Abend</strong><p>21:00 Uhr · Teams werden spontan erstellt</p></div>
+    <div class="post"><span class="tag">Sonntag</span><strong>Chill & Talk</strong><p>19:30 Uhr · Casual Games und Austausch</p></div>
+  </div>
+
+  <div class="content" id="communityRules">
+    <h3>Community-Regeln</h3>
+    <ul class="rules-list">
+      <li>Respektvoller Umgang mit allen Mitgliedern.</li>
+      <li>Kein Spam, keine Beleidigungen, kein toxisches Verhalten.</li>
+      <li>Keine Cheats, Exploits oder unfairen Vorteile.</li>
+      <li>Private Daten anderer Mitglieder bleiben privat.</li>
+      <li>Keine rassistischen, sexistischen oder diskriminierenden Inhalte.</li>
+      <li>Admins und Moderatoren haben das letzte Wort.</li>
+    </ul>
+  </div>
+
+  <div class="actions">
+    <button class="ghost" type="button" onclick="toggleProfileBox()"><span>Mein Profil</span></button>
+    <button class="ghost" type="button" onclick="showCommunityTab('downloads')"><span>Downloads</span></button>
+    <button class="ghost" type="button" onclick="showCommunityTab('videos')"><span>Videos</span></button>
+    <button class="ghost" type="button" onclick="showDashboardLegal('impressum')"><span>Impressum</span></button>
+    <button class="ghost" type="button" onclick="showDashboardLegal('datenschutz')"><span>Datenschutz</span></button>
+    <button class="logout" type="button" onclick="logout()"><span>Ausloggen</span></button>
+  </div>
+
+  <div class="profile" id="profileBox">
+    <p><strong>Benutzername:</strong><br /><span id="profileUsername">-</span></p>
+    <p><strong>E-Mail:</strong><br /><span id="profileEmail">-</span></p>
+    <p><strong>Status:</strong><br />Firebase-Community-Mitglied</p>
+    <p><strong>Rolle:</strong><br />Mitglied</p>
+  </div>
+</section>
+</main>
+
+
+<div class="password-modal" id="passwordModal" aria-hidden="true">
+  <div class="password-box" role="dialog" aria-modal="true" aria-labelledby="passwordModalTitle">
+    <button type="button" class="password-close" onclick="closePasswordModal()" aria-label="Fenster schließen">×</button>
+    <div class="password-icon">🔐</div>
+    <h3 id="passwordModalTitle">Geschützter Download</h3>
+    <p id="passwordModalText">Gib das Passwort ein, um den Download freizuschalten.</p>
+
+    <form onsubmit="submitProtectedPassword(event)">
+      <div class="password-field">
+        <input id="protectedPasswordInput" type="password" placeholder="Passwort eingeben" autocomplete="off" />
+        <button type="button" class="password-eye" onclick="togglePassword('protectedPasswordInput', this)">👁</button>
+      </div>
+
+      <div class="password-message" id="protectedPasswordMessage"></div>
+
+      <div class="password-modal-actions">
+        <button type="submit" class="password-submit">Freischalten</button>
+        <button type="button" class="password-cancel" onclick="closePasswordModal()">Abbrechen</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="cookie hidden" id="cookieBanner">
+  <div class="cookie-title">Datenschutzeinstellungen</div>
+  <p class="cookie-text">
+    Damit Login und Sicherheit funktionieren, speichert diese Website notwendige Informationen direkt im Browser.
+    YouTube-Videos werden nur geladen, wenn du ausdrücklich zustimmst.
+  </p>
+  <ul class="cookie-list">
+    <li><strong>Notwendig:</strong> Firebase-Login und Sicherheitsfunktionen</li>
+    <li><strong>Optional:</strong> YouTube-Videos erst nach deiner Zustimmung</li>
+    <li><strong>Nicht verwendet:</strong> kein Google Analytics, keine Google Fonts, kein Werbe-Tracking</li>
+  </ul>
+  <p class="cookie-note">
+    Wenn du „YouTube erlauben“ klickst, können Daten an Google/YouTube übertragen werden.
+  </p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
+    <button type="button" class="cookie-btn secondary" onclick="denyYoutubeVideos()"><span>Nur notwendige Funktionen</span></button>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  onAuthStateChanged,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA9pc9Xqe5FtFTjwF0HJcc4F4Yo8Os4PnE",
+  authDomain: "community-2d37f.firebaseapp.com",
+  projectId: "community-2d37f",
+  storageBucket: "community-2d37f.firebasestorage.app",
+  messagingSenderId: "845137729755",
+  appId: "1:845137729755:web:897917ba6a8fe3a0ed94fe",
+  measurementId: "G-NFP650LD72"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let playLoginSuccessAnimation = false;
+let loginAnimationTitle = "Willkommen zurück";
+let loginAnimationSubtitle = "Login erfolgreich";
+
+function clearMessages() {
+  document.querySelectorAll(".msg").forEach(msg => {
+    msg.textContent = "";
+    msg.className = "msg";
+  });
+}
+
+function setMessage(id, text, type) {
+  const el = document.getElementById(id);
+  el.className = "msg " + type;
+  el.textContent = text;
+}
+
+function showForm(type) {
+  const authCard = document.getElementById("authCard");
+  authCard.classList.remove("switching");
+  void authCard.offsetWidth;
+  authCard.classList.add("switching");
+  setTimeout(() => authCard.classList.remove("switching"), 380);
+
+  document.body.classList.remove("community");
+  document.getElementById("dashboard").classList.remove("active");
+  document.getElementById("authCard").style.display = "block";
+
+  document.querySelectorAll(".form").forEach(form => form.classList.remove("active"));
+  clearMessages();
+
+  const tabs = document.querySelectorAll(".tab");
+  const tabsBox = document.getElementById("tabs");
+  const title = document.getElementById("title");
+  const sub = document.getElementById("subtitle");
+
+  if (type === "login") {
+    document.getElementById("loginForm").classList.add("active");
+    tabsBox.style.display = "flex";
+    tabs[0].classList.add("active");
+    tabs[1].classList.remove("active");
+    title.textContent = "Willkommen";
+    sub.textContent = "Melde dich mit deinem Konto an.";
+  }
+
+  if (type === "register") {
+    document.getElementById("registerForm").classList.add("active");
+    tabsBox.style.display = "flex";
+    tabs[0].classList.remove("active");
+    tabs[1].classList.add("active");
+    title.textContent = "Konto erstellen";
+    sub.textContent = "Registriere dich mit E-Mail und Passwort.";
+  }
+
+  if (type === "forgot") {
+    document.getElementById("forgotForm").classList.add("active");
+    tabsBox.style.display = "none";
+    title.textContent = "Passwort zurücksetzen";
+    sub.textContent = "Gib deine E-Mail ein. Firebase sendet dir einen Reset-Link.";
+  }
+
+  if (type === "impressum") {
+    document.getElementById("impressumForm").classList.add("active");
+    tabsBox.style.display = "none";
+    title.textContent = "Impressum";
+    sub.textContent = "Angaben zum Anbieter dieser Website.";
+  }
+
+  if (type === "datenschutz") {
+    document.getElementById("datenschutzForm").classList.add("active");
+    tabsBox.style.display = "none";
+    title.textContent = "Datenschutz";
+    sub.textContent = "Informationen zur Verarbeitung deiner Daten.";
+  }
+}
+
+function togglePassword(inputId, button) {
+  const input = document.getElementById(inputId);
+  input.type = input.type === "password" ? "text" : "password";
+  button.textContent = input.type === "password" ? "👁" : "🙈";
+}
+
+async function register(event) {
+  event.preventDefault();
+
+  const username = document.getElementById("registerUsername").value.trim();
+  const email = document.getElementById("registerEmail").value.trim().toLowerCase();
+  const password = document.getElementById("registerPassword").value;
+  const passwordRepeat = document.getElementById("registerPasswordRepeat").value;
+
+  if (username.length < 3) {
+    setMessage("registerMessage", "Der Benutzername muss mindestens 3 Zeichen haben.", "error");
+    return;
+  }
+
+  if (password.length < 6) {
+    setMessage("registerMessage", "Das Passwort muss mindestens 6 Zeichen haben.", "error");
+    return;
+  }
+
+  if (password !== passwordRepeat) {
+    setMessage("registerMessage", "Die Passwörter stimmen nicht überein.", "error");
+    return;
+  }
+
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(cred.user, { displayName: username });
+    await cred.user.reload();
+
+    playLoginSuccessAnimation = true;
+    loginAnimationTitle = "Willkommen in der Community";
+    loginAnimationSubtitle = "Dein Konto wurde erfolgreich erstellt";
+    setMessage("registerMessage", "Konto wurde erstellt. Du bist jetzt eingeloggt.", "success");
+
+    showDashboard(auth.currentUser || cred.user);
+  } catch (error) {
+    let message = "Registrierung fehlgeschlagen.";
+    if (error.code === "auth/email-already-in-use") message = "Diese E-Mail ist bereits registriert.";
+    if (error.code === "auth/invalid-email") message = "Diese E-Mail ist ungültig.";
+    if (error.code === "auth/weak-password") message = "Das Passwort ist zu schwach.";
+    setMessage("registerMessage", message, "error");
+  }
+}
+
+async function login(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const password = document.getElementById("loginPassword").value;
+
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+
+    playLoginSuccessAnimation = true;
+    loginAnimationTitle = "Willkommen zurück";
+    loginAnimationSubtitle = "Login erfolgreich";
+    setMessage("loginMessage", "Login erfolgreich.", "success");
+
+    showDashboard(cred.user);
+  } catch (error) {
+    let message = "E-Mail oder Passwort ist falsch.";
+    if (error.code === "auth/invalid-email") message = "Diese E-Mail ist ungültig.";
+    if (error.code === "auth/too-many-requests") message = "Zu viele Versuche. Bitte versuche es später erneut.";
+    setMessage("loginMessage", message, "error");
+  }
+}
+
+async function resetPassword(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("forgotEmail").value.trim().toLowerCase();
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    setMessage("forgotMessage", "Passwort-Reset-Mail wurde gesendet.", "success");
+  } catch (error) {
+    let message = "Reset-Mail konnte nicht gesendet werden.";
+    if (error.code === "auth/invalid-email") message = "Diese E-Mail ist ungültig.";
+    setMessage("forgotMessage", message, "error");
+  }
+}
+
+function showDashboard(user) {
+  if (!user) return;
+
+  document.body.classList.add("community");
+  document.getElementById("authCard").style.display = "none";
+  document.getElementById("dashboard").classList.add("active");
+
+  const name = user.displayName || user.email;
+  document.getElementById("userPill").textContent = "👤 " + name;
+  document.getElementById("profileUsername").textContent = name;
+  document.getElementById("profileEmail").textContent = user.email || "-";
+
+  createCommunityParticles();
+  setupRainbowCursor();
+  showCommunityTab("home");
+  updateClock();
+
+  if (playLoginSuccessAnimation) {
+    playLoginSuccessAnimation = false;
+    setTimeout(() => playLoginFlash(user), 70);
+  }
+}
+
+
+
+function setupRainbowCursor() {
+  const cursor = document.getElementById("rainbowCursor");
+  const trails = Array.from(document.querySelectorAll(".cursor-trail"));
+
+  if (!cursor || cursor.dataset.ready === "true") return;
+
+  cursor.dataset.ready = "true";
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+
+  const trailPoints = trails.map(function () {
+    return {
+      x: mouseX,
+      y: mouseY
+    };
+  });
+
+  function moveCursor(event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    if (document.body.classList.contains("community")) {
+      cursor.classList.add("active");
+      trails.forEach(function (trail) {
+        trail.classList.add("active");
+      });
+    }
+  }
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.28;
+    cursorY += (mouseY - cursorY) * 0.28;
+
+    cursor.style.transform = `translate3d(${cursorX - cursor.offsetWidth / 2}px, ${cursorY - cursor.offsetHeight / 2}px, 0)`;
+
+    trails.forEach(function (trail, index) {
+      const previous = index === 0 ? { x: cursorX, y: cursorY } : trailPoints[index - 1];
+
+      trailPoints[index].x += (previous.x - trailPoints[index].x) * 0.22;
+      trailPoints[index].y += (previous.y - trailPoints[index].y) * 0.22;
+
+      const scale = 1 - index * 0.11;
+      trail.style.transform = `translate3d(${trailPoints[index].x - 4}px, ${trailPoints[index].y - 4}px, 0) scale(${scale})`;
+      trail.style.opacity = document.body.classList.contains("community") ? String(0.58 - index * 0.08) : "0";
+    });
+
+    if (!document.body.classList.contains("community")) {
+      cursor.classList.remove("active", "hovering", "clicking");
+      trails.forEach(function (trail) {
+        trail.classList.remove("active");
+      });
+    }
+
+    requestAnimationFrame(animateCursor);
+  }
+
+  document.addEventListener("mousemove", moveCursor);
+
+  document.addEventListener("mousedown", function () {
+    if (document.body.classList.contains("community")) {
+      cursor.classList.add("clicking");
+    }
+  });
+
+  document.addEventListener("mouseup", function () {
+    cursor.classList.remove("clicking");
+  });
+
+  document.addEventListener("mouseover", function (event) {
+    if (!document.body.classList.contains("community")) return;
+
+    if (event.target.closest("a, button, input, .link, .back, .download-card, .post, .video-card")) {
+      cursor.classList.add("hovering");
+    }
+  });
+
+  document.addEventListener("mouseout", function (event) {
+    if (!event.relatedTarget || !event.relatedTarget.closest || !event.relatedTarget.closest("a, button, input, .link, .back, .download-card, .post, .video-card")) {
+      cursor.classList.remove("hovering");
+    }
+  });
+
+  animateCursor();
+}
+
+
+function createCommunityParticles() {
+  const field = document.getElementById("particleField");
+  if (!field || field.dataset.ready === "true") return;
+
+  field.dataset.ready = "true";
+  const count = 22;
+
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement("span");
+    particle.className = "particle";
+    particle.style.setProperty("--left", `${(Math.random() * 100).toFixed(2)}%`);
+    particle.style.setProperty("--top", `${(72 + Math.random() * 30).toFixed(2)}%`);
+    particle.style.setProperty("--size", `${(2.5 + Math.random() * 6).toFixed(2)}px`);
+    particle.style.setProperty("--opacity", `${(0.18 + Math.random() * 0.45).toFixed(2)}`);
+    particle.style.setProperty("--duration", `${(14 + Math.random() * 20).toFixed(2)}s`);
+    particle.style.setProperty("--delay", `-${(Math.random() * 18).toFixed(2)}s`);
+    particle.style.setProperty("--drift", `${(-70 + Math.random() * 140).toFixed(2)}px`);
+    field.appendChild(particle);
+  }
+}
+
+function playLoginFlash(user) {
+  const overlay = document.getElementById("loginFlash");
+  const title = document.getElementById("welcomeHeadline");
+  const subtitle = document.getElementById("welcomeSubline");
+  const name = user.displayName || user.email || "Gamer";
+
+  title.textContent = loginAnimationTitle;
+  subtitle.textContent = `${loginAnimationSubtitle} · ${name} ist jetzt online`;
+
+  overlay.classList.remove("active");
+  void overlay.offsetWidth;
+  overlay.classList.add("active");
+  setTimeout(() => overlay.classList.remove("active"), 1900);
+}
+
+async function logout() {
+  try {
+    await signOut(auth);
+  } finally {
+    playLoginSuccessAnimation = false;
+    document.body.classList.remove("community");
+    document.getElementById("dashboard").classList.remove("active");
+    document.getElementById("authCard").style.display = "block";
+    document.getElementById("loginFlash").classList.remove("active");
+    showForm("login");
+  }
+}
+
+function toggleProfileBox() {
+  document.getElementById("profileBox").classList.toggle("active");
+}
+
+function showDashboardLegal(type) {
+  document.getElementById("dashboard").classList.remove("active");
+  document.getElementById("authCard").style.display = "block";
+  showForm(type);
+}
+
+function showCommunityTab(tab) {
+  const contents = document.querySelectorAll(".content");
+  const buttons = document.querySelectorAll(".nav button");
+
+  contents.forEach(content => content.classList.remove("active"));
+  buttons.forEach(button => button.classList.remove("active"));
+
+  const map = { home:0, news:1, downloads:2, videos:3, gallery:4, events:5, rules:6 };
+  const idMap = {
+    home:"communityHome",
+    news:"communityNews",
+    downloads:"communityDownloads",
+    videos:"communityVideos",
+    gallery:"communityGallery",
+    events:"communityEvents",
+    rules:"communityRules"
+  };
+
+  document.getElementById(idMap[tab]).classList.add("active");
+  buttons[map[tab]].classList.add("active");
+
+  if (tab === "videos") loadYoutubeVideosIfAllowed();
+  if (tab === "gallery") loadGalleryImages();
+}
+
+
+function createGalleryCard(fileName, title, extraClass) {
+  const card = document.createElement("div");
+  card.className = "gallery-card" + (extraClass ? " " + extraClass : "");
+
+  const image = document.createElement("img");
+  image.src = fileName;
+  image.alt = title;
+  image.loading = "lazy";
+
+  image.onerror = function () {
+    card.classList.add("is-missing");
+    card.innerHTML = '<div class="gallery-missing-text">' + fileName + ' nicht gefunden<br /><small>Lege ' + fileName + ' neben die index.html</small></div>';
+  };
+
+  card.appendChild(image);
+
+  return card;
+}
+
+function loadGalleryImages() {
+  const grid = document.getElementById("galleryGrid");
+  const privateGrid = document.getElementById("privateGalleryGrid");
+
+  if (!grid || !privateGrid || grid.dataset.loaded === "true") {
+    return;
+  }
+
+  grid.dataset.loaded = "true";
+
+  // Screenshot-Galerie:
+  // Lege deine Gaming-Screenshots direkt neben die index.html.
+  // Dateinamen: 1.jpg, 2.jpg, 3.jpg ... bis 10.jpg
+  for (let i = 1; i <= 10; i++) {
+    grid.appendChild(createGalleryCard(i + ".jpg", "Screenshot " + i, ""));
+  }
+
+  // Private Bilder-Galerie:
+  // Lege deine privaten Fotos direkt neben die index.html.
+  // Dateinamen: pr1.jpg, pr2.jpg, pr3.jpg ... bis pr10.jpg
+  // Beispiel: Naturfotos, Spaziergänge, eigene Auto-Fotos oder private Community-Bilder.
+  for (let i = 1; i <= 10; i++) {
+    privateGrid.appendChild(createGalleryCard("pr" + i + ".jpg", "Privates Bild " + i, "private-photo"));
+  }
+}
+
+
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clockTime").textContent = now.toLocaleTimeString("de-DE", { hour:"2-digit", minute:"2-digit", second:"2-digit" });
+  document.getElementById("clockDate").textContent = now.toLocaleDateString("de-DE", { weekday:"short", day:"2-digit", month:"2-digit", year:"numeric" });
+}
+
+function showCookieBannerIfNeeded() {
+  const banner = document.getElementById("cookieBanner");
+  const choice = localStorage.getItem("youtubeConsent");
+  if (!choice) banner.classList.remove("hidden");
+}
+
+function openCookieSettings() {
+  document.getElementById("cookieBanner").classList.remove("hidden");
+}
+
+function allowYoutubeVideos() {
+  localStorage.setItem("youtubeConsent", "accepted");
+  localStorage.setItem("youtubeConsentDate", new Date().toISOString());
+  document.getElementById("cookieBanner").classList.add("hidden");
+  loadYoutubeVideosIfAllowed();
+}
+
+function denyYoutubeVideos() {
+  localStorage.setItem("youtubeConsent", "denied");
+  localStorage.setItem("youtubeConsentDate", new Date().toISOString());
+  document.getElementById("cookieBanner").classList.add("hidden");
+  resetYoutubePlaceholders();
+}
+
+function loadYoutubeVideosIfAllowed() {
+  if (localStorage.getItem("youtubeConsent") !== "accepted") return;
+
+  document.querySelectorAll(".video-card").forEach(card => {
+    const id = card.dataset.videoId;
+    const title = card.dataset.videoTitle || "YouTube Video";
+    if (!id || card.querySelector("iframe")) return;
+    card.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+  });
+}
+
+
+async function sha256Text(text) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+  return hashArray.map(function (byte) {
+    return byte.toString(16).padStart(2, "0");
+  }).join("");
+}
+
+let pendingProtectedDownload = null;
+
+function protectedDownload(url, expectedHash) {
+  pendingProtectedDownload = {
+    url: url,
+    expectedHash: expectedHash
+  };
+
+  const modal = document.getElementById("passwordModal");
+  const input = document.getElementById("protectedPasswordInput");
+  const message = document.getElementById("protectedPasswordMessage");
+
+  message.textContent = "";
+  message.className = "password-message";
+  input.value = "";
+  input.type = "password";
+
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+
+  setTimeout(function () {
+    input.focus();
+  }, 120);
+}
+
+function closePasswordModal() {
+  const modal = document.getElementById("passwordModal");
+
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+  pendingProtectedDownload = null;
+}
+
+async function submitProtectedPassword(event) {
+  event.preventDefault();
+
+  if (!pendingProtectedDownload) {
+    return;
+  }
+
+  const input = document.getElementById("protectedPasswordInput");
+  const message = document.getElementById("protectedPasswordMessage");
+  const password = input.value;
+
+  if (!password) {
+    message.textContent = "Bitte gib ein Passwort ein.";
+    message.className = "password-message";
+    input.focus();
+    return;
+  }
+
+  const passwordHash = await sha256Text(password);
+
+  if (passwordHash === pendingProtectedDownload.expectedHash) {
+    message.textContent = "Passwort korrekt. Download wird geöffnet ...";
+    message.className = "password-message success";
+
+    const downloadUrl = pendingProtectedDownload.url;
+
+    setTimeout(function () {
+      closePasswordModal();
+      window.open(downloadUrl, "_blank", "noopener,noreferrer");
+    }, 450);
+
+    return;
+  }
+
+  message.textContent = "Falsches Passwort.";
+  message.className = "password-message";
+  input.value = "";
+  input.focus();
+}
+
+
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    const modal = document.getElementById("passwordModal");
+
+    if (modal && modal.classList.contains("active")) {
+      closePasswordModal();
+    }
+  }
+});
+
+document.addEventListener("click", function (event) {
+  const modal = document.getElementById("passwordModal");
+
+  if (modal && modal.classList.contains("active") && event.target === modal) {
+    closePasswordModal();
+  }
+});
+
+
+function resetYoutubePlaceholders() {
+  document.querySelectorAll(".video-card").forEach(card => {
+    const title = card.dataset.videoTitle || "YouTube Video";
+    if (!card.querySelector("iframe")) return;
+    card.innerHTML = `
+      <div class="video-placeholder">
+        <div>
+          <div class="video-icon">▶</div>
+          <strong>${title}</strong>
+          <p>Dieses Video wird von YouTube geladen. Dabei können Daten an Google/YouTube übertragen werden.</p>
+          <button type="button" class="video-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    showDashboard(user);
+  } else {
+    document.body.classList.remove("community");
+    document.getElementById("dashboard").classList.remove("active");
+    document.getElementById("authCard").style.display = "block";
+    document.getElementById("loginFlash").classList.remove("active");
+    showForm("login");
+  }
+});
+
+updateClock();
+setInterval(updateClock, 1000);
+showCookieBannerIfNeeded();
+
+window.showForm = showForm;
+window.togglePassword = togglePassword;
+window.register = register;
+window.login = login;
+window.resetPassword = resetPassword;
+window.logout = logout;
+window.toggleProfileBox = toggleProfileBox;
+window.showDashboardLegal = showDashboardLegal;
+window.showCommunityTab = showCommunityTab;
+window.allowYoutubeVideos = allowYoutubeVideos;
+window.denyYoutubeVideos = denyYoutubeVideos;
+window.openCookieSettings = openCookieSettings;
+window.protectedDownload = protectedDownload;
+window.submitProtectedPassword = submitProtectedPassword;
+window.closePasswordModal = closePasswordModal;
+</script>
+</body>
+</html>
