@@ -913,6 +913,7 @@ body.community .back{
 }
 
 .gallery-card{
+  margin:0;
   position:relative;
   overflow:hidden;
   min-height:220px;
@@ -1195,6 +1196,42 @@ body.community .back{
   }
 }
 
+
+/* Ergänzungen für Rechtstexte, Datenschutzauswahl und KI-Bildhinweise. */
+.legal-box{overflow-wrap:anywhere}
+.legal-box a,.cookie a,.privacy-footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.legal-box:focus-visible,.privacy-footer a:focus-visible,.privacy-footer button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.legal-review-note{border:1px dashed currentColor;padding:12px;border-radius:12px}
+.cookie{max-height:calc(100vh - 44px);max-height:calc(100dvh - 44px);overflow-y:auto;overscroll-behavior:contain}
+.cookie-actions .cookie-btn{flex:1 1 190px;min-height:44px}
+@media(max-width:650px){.cookie-actions .cookie-btn{flex:0 0 auto}}
+.privacy-footer{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px;margin:16px auto 0;max-width:780px;font-size:13px;line-height:1.5;text-align:center}
+.privacy-footer button{font:inherit;color:inherit;background:transparent;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* Galerie: Beschriftung im normalen Layout direkt UNTER dem jeweiligen Bild. */
+.gallery-card[data-ai-generated="true"] img{border-radius:21px 21px 0 0}
+.gallery-ai-caption{
+  position:relative;
+  z-index:2;
+  display:block;
+  width:100%;
+  margin:0;
+  padding:11px 12px;
+  color:#fff;
+  background:#160b2b;
+  border-top:1px solid rgba(216,180,254,.30);
+  font-size:13px;
+  font-weight:800;
+  line-height:1.5;
+  text-align:center;
+}
+
+/* Sichtbare KI-Kennzeichnung am jeweiligen Bild, ohne neue externe Dienste. */
+.ai-label{display:inline-block;padding:6px 10px;border-radius:10px;color:#fff;background:rgba(12,4,26,.94);border:1px solid rgba(255,255,255,.44);font-size:12px;font-weight:750;line-height:1.4;text-shadow:none}
+.ai-image-label{position:absolute;left:12px;bottom:12px;z-index:3;max-width:calc(100% - 24px);pointer-events:none}
+.ai-background-note{position:relative;z-index:2;display:table;margin:0 auto 12px;text-align:center}
+body.community .ai-background-note,.ai-background-note[data-ai-generated="false"],.dev-photo-wrap[data-ai-generated="false"] .ai-image-label{display:none}
+
 </style>
 </head>
 
@@ -1222,6 +1259,18 @@ body.community .back{
 <div class="cursor-trail" aria-hidden="true"></div>
 
 <main class="app">
+<!-- KI-Status von login.jpg: Bei einem echten Foto data-ai-generated="false" setzen. -->
+<p class="ai-label ai-background-note" data-ai-generated="true">Hintergrundbild: KI-generiert</p>
+
+<noscript>
+  <style>
+    #authCard .brand,#tabs,#loginForm,#registerForm,#forgotForm,.back,.privacy-footer button{display:none!important}
+    #impressumForm,#datenschutzForm{display:block!important;margin-bottom:18px}
+    #datenschutzForm button{display:none!important}
+  </style>
+  <p style="position:relative;z-index:2">Ohne JavaScript sind Login und Videos nicht verfügbar. Impressum und Datenschutzerklärung bleiben unten lesbar.</p>
+</noscript>
+
 
 <section class="card" id="authCard">
   <div class="brand">
@@ -1300,95 +1349,115 @@ body.community .back{
   </form>
 
   <div class="form" id="impressumForm">
-    <div class="legal-box">
+    <div class="legal-box" tabindex="0" aria-label="Impressum">
       <h2>Impressum</h2>
-      <p><strong>Angaben zum Anbieter dieser Website</strong></p>
-      <p>Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau<br />Deutschland</p>
-      <p><strong>Kontakt</strong><br />E-Mail: gigarazor.bot@web.de</p>
-      <p><strong>Verantwortlich für den Inhalt</strong><br />Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau</p>
-      <p><strong>Hinweis zur Community</strong><br />Diese Website dient dem Aufbau und Betrieb der privaten Gaming Community GigarazorLp. Die Nutzung ist nur für registrierte oder eingeladene Mitglieder vorgesehen.</p>
-      <p><strong>Externe Plattformen und Dienste</strong><br />Diese Website kann externe Dienste und Plattformen nutzen oder verlinken, insbesondere Firebase Authentication, Discord, YouTube und Google Drive. Für Inhalte und Datenverarbeitung auf externen Plattformen sind auch die jeweiligen Anbieter verantwortlich.</p>
-      <p><strong>Haftung für Inhalte</strong><br />Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden.</p>
-      <p><strong>Haftung für Links</strong><br />Diese Website kann Links zu externen Websites enthalten. Auf deren Inhalte habe ich keinen Einfluss. Für die Inhalte externer Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
-      <p><strong>Urheberrecht</strong><br />Die auf dieser Website erstellten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Beiträge Dritter werden als solche gekennzeichnet.</p>
-      <p><strong>Hinweis zu Screenshots, KI-Bildern und privaten Fotos</strong><br />Auf dieser Website können eigene Gaming-Screenshots, KI-generierte Bilder und eigene private Fotos angezeigt werden. Marken, Spielnamen, Logos, Fahrzeuge, Charaktere und sonstige Spielinhalte gehören den jeweiligen Rechteinhabern. Diese Website ist ein privates Community-Projekt und steht in keiner offiziellen Verbindung zu Spieleherstellern, Plattformbetreibern, Markeninhabern oder sonstigen Rechteinhabern. KI-generierte Bilder und Fan-Inhalte werden nicht als offizielle Inhalte von Spieleherstellern, Plattformen oder Marken dargestellt.</p><p><strong>Hinweis zu Bildmaterial</strong><br />Verwendete Bilder sollten nach Möglichkeit eigene Screenshots, eigene Fotos oder selbst erstellte beziehungsweise KI-generierte Bilder sein. Sollten Rechte Dritter betroffen sein, bitte ich um einen kurzen Hinweis per E-Mail, damit die betreffenden Inhalte geprüft und gegebenenfalls entfernt werden können.</p>
+      <p><strong>Stand: 20. September 2026</strong></p>
+      <p><strong>Anbieter dieser Website</strong><br />Gaming Community GigarazorLp<br />Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau<br />Deutschland</p>
+      <p><strong>Kontakt</strong><br />E-Mail: <a href="mailto:gigarazor.bot@web.de">gigarazor.bot@web.de</a></p>
+      <p><strong>Verantwortlich für die Inhalte</strong><br />Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau<br />Deutschland</p>
+      <p>Diese Anbieterinformationen dienen auch der Erfüllung der Informationspflichten nach § 5 Digitale-Dienste-Gesetz (DDG), soweit diese auf das Angebot anwendbar sind.</p>
+      <h3>Hinweis zur Community</h3>
+      <p>Diese Website dient dem Betrieb der Gaming Community GigarazorLp. Für die Nutzung der Community-Oberfläche ist eine Registrierung beziehungsweise Anmeldung vorgesehen. Die Bezeichnung als private Community bedeutet nicht, dass sämtliche Website-Dateien technisch gegen öffentliche Abrufe geschützt sind.</p>
+      <h3>KI und Bildmaterial</h3>
+      <p>Auf dieser Website werden KI-generierte Bilder verwendet. Sie sind bei ihrer Anzeige mit „KI-generiert“ gekennzeichnet. Das betrifft auch Hintergrund- und Profilmotive, soweit dort KI-generierte Bilder eingesetzt werden. Die Kennzeichnung gilt für das jeweilige Bild, nicht pauschal für sämtliche aktuellen oder künftigen Bilder der Website. Daneben können eigene Fotografien oder andere nicht KI-generierte Bilder veröffentlicht werden.</p>
+      <p>KI-generierte Darstellungen sind keine verlässliche Dokumentation einer realen Person, eines tatsächlichen Ortes oder eines wirklichen Ereignisses. Die Bilder werden vorab erstellt und als Dateien bereitgestellt. Es ist kein KI-Chatbot und kein interaktiver Bild- oder Textgenerator eingebunden.</p>
+      <p>Für bestimmte KI-Inhalte gelten die Transparenzpflichten nach Art. 50 der Verordnung (EU) 2024/1689 (KI-Verordnung / EU AI Act), insbesondere für Deepfakes und bestimmte Texte zur Information der Öffentlichkeit über Angelegenheiten von öffentlichem Interesse. Ein allgemeiner Hinweis im Impressum ersetzt keine erforderliche Kennzeichnung beim jeweiligen Inhalt. Die konkrete Einordnung hängt von Inhalt, Verwendung und den gesetzlichen Ausnahmen ab.</p>
+      <!-- Der Betreiber hat alle derzeitigen 22 Bilddateien als KI-Bilder bestätigt. Bei Bildwechseln den jeweiligen KI-Status aktualisieren; Nutzungsrechte separat prüfen. -->
+      <p>Fragen zur Herkunft von Bildern sowie Hinweise auf mögliche Verletzungen von Urheber-, Marken- oder Persönlichkeitsrechten können an die oben genannte E-Mail-Adresse gerichtet werden.</p>
+      <h3>Urheberrecht und Marken</h3>
+      <p>Soweit Inhalte urheberrechtlich oder durch andere Rechte geschützt sind, sind bei einer Weiterverwendung die geltenden Rechte und Lizenzbedingungen zu beachten. Rechte an fremden Marken, Spielnamen, Logos und Spielinhalten verbleiben bei den jeweiligen Rechteinhabern. Eine KI-Erstellung schließt Rechte Dritter nicht aus.</p>
+      <p>Dieses Community-Projekt ist kein offizielles Angebot der dargestellten Spielehersteller, Plattformbetreiber oder Markeninhaber. Fan-Inhalte werden nicht als deren offizielle Veröffentlichungen ausgegeben.</p>
+      <h3>Inhalte und externe Links</h3>
+      <p>Externe Verlinkungen führen insbesondere zu Discord, YouTube und Google Drive. Für die dort angebotenen Inhalte sind die jeweiligen Anbieter verantwortlich. Die eigene gesetzliche Verantwortung für Inhalte und Verlinkungen bleibt unberührt. Hinweise auf konkrete Rechtsverletzungen werden geprüft; erforderlichenfalls werden betroffene Inhalte oder Verlinkungen entfernt.</p>
+      <p>Informationen zu Firebase Authentication, externen Diensten und zur Verarbeitung personenbezogener Daten findest du in der <a href="#datenschutzForm">Datenschutzerklärung</a>.</p>
     </div>
     <span class="back" onclick="showForm('login')">Zurück zum Login</span>
   </div>
 
   <div class="form" id="datenschutzForm">
-    <div class="legal-box">
+    <div class="legal-box" tabindex="0" aria-label="Datenschutzerklärung">
       <h2>Datenschutzerklärung</h2>
-      <p>Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten bei der Nutzung dieser Website verarbeitet werden.</p>
+      <p><strong>Stand: 20. September 2026</strong></p>
+      <p>Hier erfährst du, welche personenbezogenen Daten bei der Nutzung der Gaming Community GigarazorLp verarbeitet werden, zu welchen Zwecken dies erfolgt und welche Rechte du hast.</p>
 
       <h3>1. Verantwortlicher</h3>
-      <p>Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau<br />Deutschland<br />E-Mail: gigarazor.bot@web.de</p>
+      <p>Alexander Huber<br />Spitzhiebelweg 11<br />94258 Frauenau<br />Deutschland<br />E-Mail: <a href="mailto:gigarazor.bot@web.de">gigarazor.bot@web.de</a></p>
 
-      <h3>2. Zweck der Website</h3>
-      <p>Diese Website dient dem Aufbau und Betrieb der privaten Gaming Community GigarazorLp. Nutzer können sich registrieren, anmelden und nach dem Login Community-Inhalte sehen, darunter News, Downloads, Events, YouTube-Videos und eine Screenshot-Galerie.</p>
+      <h3>2. Website-Aufruf und Hosting über GitHub Pages</h3>
+      <p>Diese Website und ihre Bilddateien werden über GitHub Pages bereitgestellt. Anbieter ist GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, USA. GitHub nennt in seiner Datenschutzerklärung außerdem GitHub B.V., Prins Bernhardplein 200, 1097 JB Amsterdam, Niederlande.</p>
+      <p>GitHub protokolliert die IP-Adresse von Besuchern für Sicherheitszwecke, auch ohne GitHub-Anmeldung. Bei Website-Aufrufen werden außerdem technische Abrufdaten verarbeitet, etwa Abrufzeit, angeforderte Inhalte, Browser-/Geräteinformationen und eine gegebenenfalls übermittelte Verweisadresse. Dies dient der Auslieferung, Fehlerbehebung und Sicherheit.</p>
+      <p>Die Nutzung des Hostings beruht auf Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse ist ein sicherer, funktionsfähiger Website-Betrieb. Empfänger sind GitHub und seine Infrastruktur-/Sicherheitsdienstleister. Für Verarbeitungen in eigener Verantwortung beschreibt GitHub die Rechtsgrundlagen in seiner Datenschutzerklärung.</p>
+      <p>Daten können in den USA und weiteren Ländern verarbeitet werden. GitHub nennt hierfür insbesondere Standardvertragsklauseln und seine Teilnahme am EU-US Data Privacy Framework, soweit jeweils anwendbar. Informationen zu den Garantien sind in den unten verlinkten Datenschutzhinweisen verfügbar.</p>
+      <p>GitHub veröffentlicht dort keine feste Löschfrist speziell für Pages-Zugriffsprotokolle. Die Speicherung richtet sich laut GitHub nach Verarbeitungszweck sowie vertraglichen und gesetzlichen Erfordernissen. Eine bestimmte Tagesfrist wird deshalb nicht zugesichert.</p>
+      <p>Weitere Informationen: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" target="_blank" rel="noopener noreferrer">GitHub Pages: Datenerhebung</a>, <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub-Datenschutzerklärung und Übermittlungsgarantien</a> sowie <a href="https://docs.github.com/en/site-policy/privacy-policies/github-subprocessors" target="_blank" rel="noopener noreferrer">GitHub-Unterauftragsverarbeiter</a>.</p>
 
-      <h3>3. Registrierung und Login mit Firebase Authentication</h3>
-      <p>Für Registrierung, Login, Sitzungsverwaltung und Passwort-Zurücksetzung verwendet diese Website Firebase Authentication. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
-      <p>Bei Registrierung und Anmeldung können insbesondere folgende Daten verarbeitet werden:</p>
-      <ul>
-        <li>E-Mail-Adresse</li>
-        <li>Benutzername beziehungsweise Anzeigename</li>
-        <li>Firebase-Nutzer-ID</li>
-        <li>technische Authentifizierungs- und Sitzungsdaten</li>
-        <li>IP-Adresse und technische Zugriffsdaten, soweit für den Dienst erforderlich</li>
-      </ul>
-      <p>Passwörter werden nicht lokal im Quellcode oder im Browser als Klartext gespeichert. Die Authentifizierung und Passwort-Zurücksetzung erfolgt über Firebase Authentication.</p>
+      <h3>3. Registrierung und Firebase Authentication</h3>
+      <p>Für Registrierung, Anmeldung, Sitzungsverwaltung und Passwort-Zurücksetzung wird Firebase Authentication von Google eingesetzt. Verarbeitet werden die von dir eingegebene E-Mail-Adresse, dein Benutzername beziehungsweise Anzeigename, dein Passwort für die Authentifizierung, eine Firebase-Nutzer-ID sowie technische Authentifizierungs-, Sitzungs- und Sicherheitsdaten. Dazu gehören insbesondere IP-Adresse, Browserkennung und Kontometadaten, etwa Erstellungs- und Anmeldezeitpunkte.</p>
+      <p>Die Anmeldung erfolgt mit E-Mail-Adresse und Passwort; ein Google-Konto ist dafür nicht erforderlich. Der Anzeigename und die E-Mail-Adresse werden in der eigenen Profilansicht angezeigt. Eine öffentliche Mitgliederliste ist nicht eingebaut.</p>
+      <p>Die Firebase-Skripte werden bereits beim Aufruf der Website von <code>www.gstatic.com</code> geladen. Dadurch erhält Google technische Abrufdaten, insbesondere deine IP-Adresse und Browserinformationen, auch ohne YouTube-Einwilligung. Die Anwendung initialisiert Firebase Authentication beim Seitenaufruf und kann eine vorhandene Anmeldung wiederherstellen. Eine Ablehnung von YouTube schaltet diese Anmeldefunktionen nicht ab.</p>
+      <p>Die Verarbeitung zur Bereitstellung und Verwaltung deines angeforderten Nutzerkontos beruht auf Art. 6 Abs. 1 lit. b DSGVO. Technische Bereitstellung und Missbrauchsschutz beruhen, soweit hierfür erforderlich, auf Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse ist ein sicherer und verlässlicher Community-Zugang.</p>
+      <p>Google verarbeitet die überlassenen Kontodaten im Rahmen der jeweils geltenden Auftragsverarbeitungsbedingungen. Nach Googles veröffentlichten Angaben wird Firebase Authentication ausschließlich in Rechenzentren in den USA betrieben. An der Leistungserbringung sind Google-Gesellschaften und Unterauftragsverarbeiter beteiligt, insbesondere Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA.</p>
+      <p class="legal-review-note"><strong>VOR VERÖFFENTLICHUNG BESTÄTIGEN – Firebase-Vertrag:</strong> [Die im konkreten Firebase-/Google-Cloud-Vertrag genannte Google-Gesellschaft samt Anschrift eintragen und die anwendbaren Auftragsverarbeitungsbedingungen bestätigen. Für Google-Cloud-Verträge mit deutscher Rechnungsadresse nennt Google grundsätzlich Google Cloud EMEA Limited, 70 Sir John Rogerson’s Quay, Dublin 2, Irland; abweichende bestehende Vereinbarungen müssen berücksichtigt werden.]</p>
+      <p>Die Website legt keine eigene Klartext-Passwortdatei an. Das Passwort wird bei der Eingabe vorübergehend im Formular verarbeitet und zur Authentifizierung an Firebase übermittelt. Firebase-Verbindungen verwenden HTTPS. Bitte sende dein Passwort nicht per E-Mail und melde dich auf gemeinsam genutzten Geräten nach der Nutzung ab.</p>
+      <p>Weitere Informationen: <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">Firebase-Datenschutzinformationen</a>, <a href="https://firebase.google.com/terms" target="_blank" rel="noopener noreferrer">Vertragsbedingungen für Firebase-Dienste</a> und <a href="https://cloud.google.com/terms/data-processing-addendum" target="_blank" rel="noopener noreferrer">Google Cloud Data Processing Addendum</a>.</p>
 
-      <h3>4. Cookies und lokale Speicherung</h3>
-      <p>Diese Website nutzt technisch notwendige lokale Speicherungen, damit Login-Funktionen, Sitzungsverwaltung und Datenschutzeinstellungen funktionieren können.</p>
-      <ul>
-        <li><strong>Firebase Authentication:</strong> Speicherung von Authentifizierungs- und Sitzungsinformationen im Browser</li>
-        <li><strong>youtubeConsent:</strong> lokale Speicherung deiner YouTube-Auswahl</li>
-        <li><strong>youtubeConsentDate:</strong> lokale Speicherung des Zeitpunkts deiner YouTube-Auswahl</li>
-      </ul>
-      <p>Diese technisch notwendigen Speicherungen dienen der Bereitstellung der Website und der Login-Funktionen. Die freiwillige YouTube-Einwilligung wird erst gespeichert, wenn du YouTube erlaubst oder ablehnst.</p>
+      <h3>4. Speicherung auf deinem Gerät</h3>
+      <p>Firebase Authentication kann den Anmeldestatus mit Authentifizierungs- und Sitzungstokens im Browserspeicher, insbesondere in IndexedDB beziehungsweise lokalem Speicher, aufrechterhalten. Die voreingestellte dauerhafte Anmeldung kann auch nach dem Schließen des Browsers fortbestehen. Sie lässt sich durch „Abmelden“ beziehungsweise durch Löschen der Website-Daten im Browser beenden; das Nutzerkonto bei Firebase wird dadurch nicht gelöscht.</p>
+      <p>Die Website speichert außerdem deine YouTube-Auswahl in <code>youtubeConsent</code>, den Entscheidungszeitpunkt in <code>youtubeConsentDate</code> und die Version der Einwilligungsinformation in <code>youtubeConsentVersion</code>. Diese Angaben dienen nur dazu, deine Auswahl zu beachten, nicht zur Reichweitenmessung. Sie werden durch die Website nicht an ein eigenes Einwilligungs-Backend übertragen.</p>
+      <p>Die Auswahl wird höchstens 180 Tage lang als gültig berücksichtigt und anschließend bei der nächsten Prüfung neu abgefragt. Die Website prüft beim Aufruf, beim Öffnen der Videos und regelmäßig während der Nutzung. Bei einer geänderten Einwilligungsinformation kann eine erneute Auswahl erforderlich sein. Du kannst deine Entscheidung jederzeit ändern oder die gespeicherten Website-Daten löschen. Ist die dauerhafte Speicherung im Browser gesperrt, gilt die Auswahl nur im aktuellen geöffneten Dokument.</p>
+      <p>Soweit Speicherung oder Zugriff unbedingt erforderlich sind, um die ausdrücklich gewünschte Anmeldung oder die Beachtung deiner Datenschutzauswahl zu ermöglichen, erfolgt dies nach § 25 Abs. 2 Nr. 2 TDDDG. Nicht notwendige Zugriffe im Zusammenhang mit YouTube erfolgen nur nach Einwilligung gemäß § 25 Abs. 1 TDDDG. Die anschließende Verarbeitung personenbezogener Daten richtet sich zusätzlich nach den jeweils genannten DSGVO-Rechtsgrundlagen.</p>
 
-      <h3>5. Externe Inhalte: YouTube</h3>
-      <p>Diese Website kann Videos der Plattform YouTube einbinden. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
-      <p>YouTube-Videos werden nicht automatisch geladen. Erst wenn du der Anzeige von YouTube-Videos zustimmst, wird eine Verbindung zu YouTube beziehungsweise Google hergestellt. Dabei können personenbezogene Daten wie IP-Adresse, Browserinformationen, Geräteinformationen und Informationen über den Besuch dieser Website an Google übermittelt werden.</p>
-      <p>Für die Einbindung wird nach Möglichkeit der erweiterte Datenschutzmodus über die Domain youtube-nocookie.com verwendet. Trotzdem kann beim Abspielen eines Videos eine Datenübertragung an Google erfolgen.</p>
-      <p>Du kannst deine Auswahl über „YouTube-Einstellungen ändern“ erneut öffnen oder durch Löschen des Browser-Speichers zurücksetzen.</p>
+      <h3>5. Freiwillige YouTube-Einbettungen</h3>
+      <p>Im Videobereich können YouTube-Videos eingebunden werden. Anbieter für Nutzer im Europäischen Wirtschaftsraum ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Weitere Anbieterinformationen stehen in den <a href="https://policies.google.com/terms?gl=DE&amp;hl=de" target="_blank" rel="noopener noreferrer">Google-Nutzungsbedingungen für Deutschland</a>. An der Verarbeitung kann insbesondere auch Google LLC in den USA beteiligt sein.</p>
+      <p>Ohne deine Zustimmung werden durch die Videoeinbettungen keine YouTube-Player und keine externen Vorschaubilder geladen. Nach „YouTube erlauben“ und beim Öffnen des Videobereichs werden Player über <code>www.youtube-nocookie.com</code> eingebunden. Bereits beim Laden des Players – nicht erst beim Starten eines Videos – können technische Daten an Google übermittelt werden.</p>
+      <p>Dazu zählen insbesondere IP-Adresse, Browser- und Geräteinformationen, die Herkunftswebsite, Kennungen sowie Informationen über geladene Videos und Interaktionen mit dem Player. Je nach Playerverhalten können Cookies oder ähnliche Speichertechniken eingesetzt oder ausgelesen werden. Google verarbeitet Daten zur Videobereitstellung und für eigene, in seiner Datenschutzerklärung erläuterte Zwecke. Der erweiterte Datenschutzmodus verhindert nicht jede Datenverarbeitung und bedeutet nicht, dass die Nutzung anonym ist.</p>
+      <p>Rechtsgrundlagen für die von uns veranlasste optionale Einbettung sind Art. 6 Abs. 1 lit. a DSGVO sowie, soweit Informationen auf deinem Gerät gespeichert oder ausgelesen werden, § 25 Abs. 1 TDDDG. Die Einwilligung gilt für die YouTube-Einbettungen dieser Website. Die Community-Anmeldung bleibt bei Ablehnung nutzbar. Informationen zu Übermittlungen in die USA stehen in Abschnitt 6.</p>
+      <p><strong>Widerruf:</strong> Über „YouTube-Einstellungen ändern“ kannst du jederzeit „YouTube ablehnen“ wählen. Bereits eingebundene Player werden dann aus dieser Seite entfernt. Weitere Einbettungen unterbleiben, bis du erneut zustimmst. Bereits erfolgte Verarbeitungen bleiben vom Widerruf unberührt. Bereits bei Google gespeicherte Daten oder fremde Cookies werden hierdurch nicht automatisch gelöscht; hierfür stehen dir die Browser- und Google-Datenschutzeinstellungen zur Verfügung.</p>
+      <p><button type="button" class="ghost" onclick="openCookieSettings()"><span>YouTube-Einstellungen ändern</span></button> <button type="button" class="ghost" onclick="denyYoutubeVideos()"><span>YouTube-Einwilligung widerrufen</span></button></p>
+      <p id="youtubeConsentStatus" role="status" aria-live="polite"></p>
+      <p>Weitere Informationen: <a href="https://policies.google.com/privacy?hl=de" target="_blank" rel="noopener noreferrer">Google-Datenschutzerklärung</a> und <a href="https://policies.google.com/technologies/retention?hl=de" target="_blank" rel="noopener noreferrer">Aufbewahrung von Daten bei Google</a>. Die dort beschriebenen Löschmöglichkeiten und kontobezogenen Einstellungen gelten auch für Daten, die Google im Rahmen seiner eigenen Verantwortlichkeit verarbeitet.</p>
 
-      <h3>6. Externe Links: Discord, YouTube und Google Drive</h3>
-      <p>Diese Website kann Links zu Discord, YouTube, Google Drive oder anderen externen Plattformen enthalten. Beim Anklicken dieser Links verlässt du diese Website. Es gelten dann die Datenschutzbestimmungen und Nutzungsbedingungen des jeweiligen Anbieters.</p>
+      <h3>6. Übermittlungen in Drittländer</h3>
+      <p>Bei Firebase Authentication findet eine Verarbeitung in den USA statt; auch bei YouTube und anderen Google-Diensten können Daten außerhalb des Europäischen Wirtschaftsraums verarbeitet werden. Google LLC gibt an, am EU-U.S. Data Privacy Framework teilzunehmen. Soweit die konkrete Übermittlung von einer gültigen Zertifizierung und dem anwendbaren Angemessenheitsbeschluss erfasst ist, kann sie auf Art. 45 DSGVO gestützt werden.</p>
+      <p>Soweit erforderlich und für die konkrete Übermittlung wirksam vereinbart, kommen Standardvertragsklauseln gemäß Art. 46 Abs. 2 lit. c DSGVO und erforderliche ergänzende Schutzmaßnahmen in Betracht. Eine YouTube-Einwilligung ersetzt nicht die Prüfung der Voraussetzungen für Drittlandübermittlungen. Informationen und gegebenenfalls eine Kopie der einschlägigen Garantien erhältst du unter der oben genannten Kontaktadresse.</p>
+      <p>Die veröffentlichten Google-Informationen findest du unter <a href="https://policies.google.com/privacy/frameworks?hl=de" target="_blank" rel="noopener noreferrer">Rahmenbedingungen für Datenübermittlungen</a>. Welche Vertrags- und Übermittlungsgrundlagen für das konkrete Firebase-Projekt gelten, ist vor Veröffentlichung anhand der Projektunterlagen zu bestätigen.</p>
 
-      <h3>7. Download-Links über Google Drive</h3>
-      <p>Download-Links auf dieser Website können zu Dateien führen, die über Google Drive bereitgestellt werden. Google Drive wird erst geöffnet, wenn du aktiv auf einen Download-Link klickst. Dabei können Daten wie IP-Adresse, Browserinformationen, Geräteinformationen und Informationen über den Zugriff an Google übertragen werden. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
-      <p>Die Freigabe und Zugriffskontrolle der Dateien erfolgt über Google Drive. Es gelten zusätzlich die Datenschutzbestimmungen und Nutzungsbedingungen von Google.</p>
+      <h3>7. Externe Links und Google-Drive-Downloads</h3>
+      <p>Discord, der YouTube-Kanal und Google-Drive-Downloads sind als externe Links eingebunden. Allein das Anzeigen dieser Links ruft die Zielseiten nicht auf. Nach einem Klick beziehungsweise dem Öffnen eines Download-Links verarbeitet der Zielanbieter die für die Verbindung erforderlichen Daten und gegebenenfalls weitere Nutzungsdaten. Für die dortige Verarbeitung gelten die Informationen des jeweiligen Anbieters.</p>
+      <p>Die Verlinkung dient der Bereitstellung von Community-Angeboten und beruht, soweit hierbei durch uns personenbezogene Daten verarbeitet werden, auf Art. 6 Abs. 1 lit. f DSGVO. Für ausdrücklich angeforderte Leistungen kommt Art. 6 Abs. 1 lit. b DSGVO in Betracht. Eine Zustimmung zu eingebetteten YouTube-Videos ist keine pauschale Einwilligung in Discord oder Google Drive.</p>
+      <p>Die tatsächliche Zugriffskontrolle für Download-Dateien richtet sich nach den Freigaben bei Google Drive. Eine Passwortabfrage in der Website-Oberfläche ist kein Ersatz für eine Berechtigungsprüfung beim Dateianbieter.</p>
 
-      <h3>8. Screenshot-Galerie, KI-Bilder und private Fotos</h3>
-      <p>Die Galerie zeigt statische Bilddateien, die direkt auf dieser Website bereitgestellt werden. Dabei können eigene Gaming-Screenshots, KI-generierte Bilder und eigene private Fotos angezeigt werden.</p>
-      <p>Derzeit gibt es keine Upload-Funktion für Nutzer. Besucher können keine eigenen Bilder über diese Website hochladen. Wenn später Uploads, Profilbilder, Kommentare oder eine Datenbank-Funktion eingebaut werden, muss diese Datenschutzerklärung entsprechend erweitert werden.</p>
-      <p>Beim bloßen Anzeigen der Galerie werden durch diese Website keine zusätzlichen Tracking- oder Analyse-Dienste eingesetzt. Die Bilder werden als normale Website-Dateien geladen.</p>
+      <h3>8. Galerie, Profilmotiv und KI-Inhalte</h3>
+      <p>Galerie, Hintergrund und Profilmotiv werden als statische Dateien von dieser Website geladen. Hierfür fallen die in Abschnitt 2 beschriebenen Zugriffsdaten an. Es gibt keine Funktion für Besucher, eigene Bilder, Kommentare oder Beiträge hochzuladen.</p>
+      <p>Die Bilddateien werden nicht durch die Firebase-Anmeldung selbst geschützt. Eine Anzeige erst nach dem Login bedeutet daher nicht, dass die Dateien nur für Mitglieder abrufbar sind. Die Darstellung enthält keine automatische Gesichtserkennung oder biometrische Auswertung.</p>
+      <p>Diese Website übermittelt Eingaben nicht an einen eingebauten generativen KI-Dienst. Es gibt keinen KI-Chatbot, keine KI-gestützte Bewertung von Mitgliedern und keine automatisierte Entscheidung mit rechtlicher oder vergleichbar erheblicher Wirkung im Sinne von Art. 22 DSGVO. Die als KI-generiert gekennzeichneten Bilder wurden vorab mit KI erstellt. Das Betrachten dieser Dateien löst keine Bildgenerierung aus und übermittelt keine Besuchereingaben an einen Bildgenerator.</p>
+      <p>Bei Fragen zu abgebildeten personenbezogenen Informationen oder bei einem Löschungswunsch kannst du dich an den Verantwortlichen wenden. Die Veröffentlichung von Aufnahmen identifizierbarer Personen benötigt eine gesonderte Prüfung der Rechte und der maßgeblichen Rechtsgrundlage; aus der bloßen Bereitstellung der Datei folgt keine Einwilligung der abgebildeten Person.</p>
 
       <h3>9. Kontaktaufnahme per E-Mail</h3>
-      <p>Wenn du per E-Mail Kontakt mit mir aufnimmst, wird deine E-Mail inklusive der darin angegebenen Daten zwecks Bearbeitung der Anfrage gespeichert. Diese Daten gebe ich nicht ohne deine Einwilligung weiter. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO, also dem berechtigten Interesse an der Bearbeitung von Anfragen.</p>
+      <p>Bei einer Kontaktaufnahme werden deine E-Mail-Adresse, der Nachrichteninhalt, gegebenenfalls dein Name und Anhänge sowie technische Kommunikationsdaten verarbeitet. Zweck ist die Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO bei Anfragen zu deinem Nutzerverhältnis, ansonsten Art. 6 Abs. 1 lit. f DSGVO aufgrund des berechtigten Interesses an der Beantwortung von Anfragen. Die Bearbeitung datenschutzrechtlicher Anträge beruht auf Art. 6 Abs. 1 lit. c DSGVO in Verbindung mit den einschlägigen Betroffenenrechten.</p>
+      <p>An der Zustellung und Speicherung sind die E-Mail-Dienstleister von Absender und Empfänger beteiligt. Eine Weitergabe kann außerdem erforderlich sein, um gesetzlichen Pflichten nachzukommen oder Rechtsansprüche zu klären. E-Mails werden gelöscht, sobald die Anfrage abschließend bearbeitet ist und weder eine weitere Erforderlichkeit noch gesetzliche Aufbewahrungs- oder Nachweispflichten bestehen. Für sensible Informationen solltest du zunächst einen geeigneten Übermittlungsweg abstimmen.</p>
 
-      <h3>10. Nicht verwendete Dienste</h3>
-      <p>Diese Website verwendet derzeit kein Google Analytics, keinen Google Tag Manager, keine Google Fonts, kein Werbe-Tracking und keine Marketing-Cookies.</p>
+      <h3>10. Speicherdauer und Kontolöschung</h3>
+      <p>Kontodaten werden während des Bestehens und der erforderlichen Verwaltung des Nutzerkontos verarbeitet. Du kannst die Löschung oder Berichtigung deines Kontos über die oben genannte E-Mail-Adresse verlangen. Dafür kann eine angemessene Überprüfung nötig sein, dass die Anfrage tatsächlich von dir stammt. Eine Selbstbedienungsfunktion zur Kontolöschung ist nicht eingebaut.</p>
+      <p>Nach Wegfall des Zwecks werden Daten gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten oder erforderlichen Gründe für die Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen entgegenstehen. Firebase nennt für protokollierte IP-Adressen eine Aufbewahrung von einigen Wochen. Nach einer vom Betreiber veranlassten Nutzerlöschung kann die Entfernung verbleibender Authentifizierungsdaten aus Live- und Sicherungssystemen laut Firebase bis zu 180 Tage beanspruchen.</p>
+      <p>Die 180-tägige Gültigkeit der lokalen YouTube-Auswahl ist davon unabhängig. Ein Abmelden oder Löschen des Browserspeichers löscht weder dein Firebase-Konto noch bereits an externe Anbieter übermittelte Daten. Für die Speicherung von Hosting-Zugriffsdaten gelten die Angaben zu GitHub Pages in Abschnitt 2.</p>
 
-      <h3>11. Rechtsgrundlagen</h3>
-      <p>Die Verarbeitung im Rahmen von Registrierung, Login und Community-Zugang erfolgt, soweit erforderlich, auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO. Technisch notwendige Verarbeitungen können auf Art. 6 Abs. 1 lit. f DSGVO beruhen. Die Einbindung von YouTube-Videos erfolgt nur nach deiner Einwilligung.</p>
+      <h3>11. Deine Rechte</h3>
+      <p>Unter den jeweiligen gesetzlichen Voraussetzungen hast du das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Erteilte Einwilligungen kannst du jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3); die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt.</p>
+      <p><strong>Widerspruchsrecht:</strong> Soweit Daten auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO verarbeitet werden, kannst du aus Gründen, die sich aus deiner besonderen Situation ergeben, nach Art. 21 DSGVO widersprechen. Gegen eine Verarbeitung für Direktwerbung kannst du jederzeit ohne Angabe solcher Gründe widersprechen. Im Website-Code ist kein Versand von Direktwerbung eingebaut.</p>
+      <p>Zur Ausübung deiner Rechte genügt eine Nachricht an die oben genannte E-Mail-Adresse. Die Bereitstellung deiner Registrierungsdaten ist nicht gesetzlich vorgeschrieben. Ohne E-Mail-Adresse, Anzeigenamen und Passwort kann jedoch kein entsprechendes Community-Konto bereitgestellt werden. Eine Ablehnung von YouTube verhindert nur die Einbettung der Videos.</p>
 
-      <h3>12. Speicherdauer</h3>
-      <p>Accountdaten bleiben gespeichert, solange das Nutzerkonto besteht oder gesetzliche Aufbewahrungspflichten entgegenstehen. Lokal gespeicherte Einstellungen bleiben gespeichert, bis du sie löschst oder den Browser-Speicher leerst.</p>
+      <h3>12. Beschwerderecht</h3>
+      <p>Du kannst dich nach Art. 77 DSGVO bei einer Datenschutzaufsichtsbehörde beschweren, insbesondere in dem Mitgliedstaat deines gewöhnlichen Aufenthalts, deines Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes. Für nichtöffentliche Stellen in Bayern kommt insbesondere das Bayerische Landesamt für Datenschutzaufsicht (BayLDA) in Betracht.</p>
+      <p>Bayerisches Landesamt für Datenschutzaufsicht<br />Promenade 18, 91522 Ansbach<br />Postanschrift: Postfach 1349, 91504 Ansbach<br /><a href="https://www.lda.bayern.de/de/beschwerde.html" target="_blank" rel="noopener noreferrer">Beschwerde beim BayLDA einreichen</a></p>
 
-      <h3>13. Rechte der betroffenen Personen</h3>
-      <p>Betroffene Personen haben nach der DSGVO insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen.</p>
-
-      <h3>14. Beschwerderecht</h3>
-      <p>Betroffene Personen haben das Recht, sich bei einer zuständigen Datenschutzaufsichtsbehörde zu beschweren.</p>
-
-      <h3>15. Hinweis</h3>
-      <p>Diese Vorlage ersetzt keine anwaltliche Prüfung. Sobald die Website öffentlich betrieben wird, Hosting, Datenbank, Analyse-Tools, Kontaktformulare oder weitere Dienste hinzukommen, muss diese Datenschutzerklärung geprüft und angepasst werden.</p>
+      <h3>13. Nicht eingesetzte Funktionen und Änderungen</h3>
+      <p>Im Website-Code sind kein Google Analytics, kein Google Tag Manager, keine extern geladenen Google Fonts und kein eigenes Werbe- oder Reichweitentracking eingebunden. Firebase wird hier für Authentication verwendet; Firestore, Realtime Database und Cloud Storage werden im Website-Code nicht aufgerufen. Davon zu unterscheiden sind die beschriebenen Verarbeitungen durch Hosting, Firebase und nach Einwilligung durch YouTube.</p>
+      <p>Bei Änderungen der verwendeten Dienste, der Datenverarbeitung oder der rechtlichen Anforderungen wird diese Erklärung angepasst. Änderungen an einer einwilligungspflichtigen Verarbeitung können eine erneute Einwilligung erforderlich machen.</p>
     </div>
     <span class="back" onclick="showForm('login')">Zurück zum Login</span>
   </div>
+
 </section>
 
 <section class="card community-card" id="dashboard">
@@ -1405,8 +1474,10 @@ body.community .back{
     <div class="top-showcase">
       <div class="dev-card">
         <div class="dev-badge">⚡ DEV Spotlight</div>
-        <div class="dev-photo-wrap">
-          <img class="dev-photo" src="dev-gigarazorlp.png" alt="DEV GigarazorLp Profilbild" />
+        <!-- KI-Status von dev-gigarazorlp.png: Bei einem echten Foto auf "false" setzen. -->
+        <div class="dev-photo-wrap" data-ai-generated="true">
+          <img class="dev-photo" src="dev-gigarazorlp.png" alt="DEV GigarazorLp Profilmotiv" />
+          <span class="ai-label ai-image-label">KI-generiert</span>
         </div>
         <div class="dev-name">DEV GigarazorLp</div>
         <div class="dev-role">Creator • Community/Forum Owner</div>
@@ -1560,7 +1631,7 @@ body.community .back{
           <div class="video-icon">▶</div>
           <strong>Community Trailer</strong>
           <p>Dieses Video wird von YouTube geladen. Dabei können Daten an Google/YouTube übertragen werden.</p>
-          <button type="button" class="video-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
+          <button type="button" class="video-btn" onclick="openCookieSettings()"><span>YouTube-Einstellungen öffnen</span></button>
         </div>
       </div>
     </div>
@@ -1571,7 +1642,7 @@ body.community .back{
           <div class="video-icon">▶</div>
           <strong>Gameplay Highlights</strong>
           <p>Dieses Video wird von YouTube geladen. Dabei können Daten an Google/YouTube übertragen werden.</p>
-          <button type="button" class="video-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
+          <button type="button" class="video-btn" onclick="openCookieSettings()"><span>YouTube-Einstellungen öffnen</span></button>
         </div>
       </div>
     </div>
@@ -1583,11 +1654,11 @@ body.community .back{
 
 
   <div class="content" id="communityGallery">
-    <!-- Screenshot-Galerie: Diese Bilder liegen neben der index.html und heißen 1.jpg bis 10.jpg -->
+    <!-- Gaming-Galerie: Dateien und KI-Status stehen unten in GALLERY_IMAGES. -->
     <div class="gallery-grid" id="galleryGrid"></div>
 
     <div class="private-gallery-section">
-      <!-- Private Bilder-Galerie: Diese Bilder liegen neben der index.html und heißen pr1.jpg bis pr10.jpg -->
+      <!-- Weitere Galerie: Dateien und KI-Status stehen unten in PRIVATE_GALLERY_IMAGES. -->
       <div class="gallery-grid" id="privateGalleryGrid"></div>
     </div>
   </div>
@@ -1627,6 +1698,11 @@ body.community .back{
     <p><strong>Rolle:</strong><br />Mitglied</p>
   </div>
 </section>
+<footer class="privacy-footer" aria-label="Rechtliches und Datenschutzeinstellungen">
+  <a href="#impressumForm">Impressum</a>
+  <a href="#datenschutzForm">Datenschutz</a>
+  <button type="button" onclick="openCookieSettings()">YouTube-Einstellungen ändern</button>
+</footer>
 </main>
 
 
@@ -1653,66 +1729,25 @@ body.community .back{
   </div>
 </div>
 
-<div class="cookie hidden" id="cookieBanner">
-  <div class="cookie-title">Datenschutzeinstellungen</div>
-  <p class="cookie-text">
-    Damit Login und Sicherheit funktionieren, speichert diese Website notwendige Informationen direkt im Browser.
-    YouTube-Videos werden nur geladen, wenn du ausdrücklich zustimmst.
-  </p>
-  <ul class="cookie-list">
-    <li><strong>Notwendig:</strong> Firebase-Login und Sicherheitsfunktionen</li>
-    <li><strong>Optional:</strong> YouTube-Videos erst nach deiner Zustimmung</li>
-    <li><strong>Nicht verwendet:</strong> kein Google Analytics, keine Google Fonts, kein Werbe-Tracking</li>
-  </ul>
-  <p class="cookie-note">
-    Wenn du „YouTube erlauben“ klickst, können Daten an Google/YouTube übertragen werden.
-  </p>
+<div class="cookie hidden" id="cookieBanner" role="region" aria-label="YouTube-Datenschutzeinstellungen">
+  <div class="cookie-title" id="cookieTitle" tabindex="-1">Datenschutzeinstellungen</div>
+  <p class="cookie-text">Firebase Authentication stellt Registrierung und Login bereit. Die dafür eingebundenen Google-Skripte werden bereits beim Seitenaufruf geladen. YouTube-Videos sind dagegen freiwillig und bis zu deiner Einwilligung gesperrt.</p>
+  <p class="cookie-note">Mit „YouTube erlauben“ stimmst du den Videoeinbettungen durch Google Ireland Limited / YouTube zu. Beim Laden der Player können IP-Adresse, Browser-/Gerätedaten, Herkunftswebsite und Nutzungsinformationen an Google, auch in die USA, übermittelt und Cookies oder ähnliche Speichertechniken verwendet werden. Der Modus youtube-nocookie.com verhindert nicht jede Datenverarbeitung.</p>
+  <p class="cookie-note">Rechtsgrundlagen: Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Deine Auswahl gilt bis zu 180 Tage. Ablehnen beeinträchtigt den Login nicht. Über „YouTube-Einstellungen ändern“ kannst du jederzeit widerrufen. <a href="#datenschutzForm">Details, Empfänger und Drittlandübermittlungen in der Datenschutzerklärung</a>.</p>
   <div class="cookie-actions">
     <button type="button" class="cookie-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
-    <button type="button" class="cookie-btn secondary" onclick="denyYoutubeVideos()"><span>Nur notwendige Funktionen</span></button>
+    <button type="button" class="cookie-btn" onclick="denyYoutubeVideos()"><span>YouTube ablehnen</span></button>
   </div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signOut,
-  onAuthStateChanged,
-  updateProfile
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA9pc9Xqe5FtFTjwF0HJcc4F4Yo8Os4PnE",
-  authDomain: "community-2d37f.firebaseapp.com",
-  projectId: "community-2d37f",
-  storageBucket: "community-2d37f.firebasestorage.app",
-  messagingSenderId: "845137729755",
-  appId: "1:845137729755:web:897917ba6a8fe3a0ed94fe",
-  measurementId: "G-NFP650LD72"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-let playLoginSuccessAnimation = false;
-let loginAnimationTitle = "Willkommen zurück";
-let loginAnimationSubtitle = "Login erfolgreich";
-
+<script>
+"use strict";
+// Rechtstexte und Consent funktionieren auch bei nicht erreichbarem Firebase-CDN.
 function clearMessages() {
   document.querySelectorAll(".msg").forEach(msg => {
     msg.textContent = "";
     msg.className = "msg";
   });
-}
-
-function setMessage(id, text, type) {
-  const el = document.getElementById(id);
-  el.className = "msg " + type;
-  el.textContent = text;
 }
 
 function showForm(type) {
@@ -1772,6 +1807,218 @@ function showForm(type) {
     title.textContent = "Datenschutz";
     sub.textContent = "Informationen zur Verarbeitung deiner Daten.";
   }
+
+  const isLegalView = type === "impressum" || type === "datenschutz";
+  const targetHash = isLegalView ? "#" + type + "Form" : "";
+  if (isLegalView || getLegalViewFromHash()) {
+    try {
+      history.replaceState(null, "", location.pathname + location.search + targetHash);
+    } catch (_) {
+      // In restricted/file contexts the content remains readable without history updates.
+    }
+  }
+  if (isLegalView) {
+    document.getElementById("cookieBanner").classList.add("hidden");
+    document.querySelector("#" + type + "Form .legal-box").focus({ preventScroll: true });
+  } else {
+    showCookieBannerIfNeeded();
+  }
+}
+
+// 180 Tage sind eine bewusste Website-Einstellung, keine pauschale gesetzliche Frist.
+const YOUTUBE_CONSENT_VERSION = "2026-09-20";
+const YOUTUBE_CONSENT_MAX_AGE = 180 * 24 * 60 * 60 * 1000;
+let youtubeMemoryConsent = null;
+let youtubeMemoryOnly = false;
+let youtubeSettingsOpener = null;
+
+function getLegalViewFromHash() {
+  const views = {
+    "#impressum": "impressum", "#impressumForm": "impressum",
+    "#datenschutz": "datenschutz", "#datenschutzForm": "datenschutz"
+  };
+  return views[location.hash] || null;
+}
+
+function getYoutubeConsent() {
+  let record = youtubeMemoryConsent;
+  if (!youtubeMemoryOnly) {
+    try {
+      record = {
+        choice: localStorage.getItem("youtubeConsent"),
+        date: localStorage.getItem("youtubeConsentDate"),
+        version: localStorage.getItem("youtubeConsentVersion")
+      };
+    } catch (_) {
+      youtubeMemoryOnly = true;
+    }
+  }
+  if (!record || !["accepted", "denied"].includes(record.choice) ||
+      record.version !== YOUTUBE_CONSENT_VERSION) return null;
+  const timestamp = Date.parse(record.date);
+  const age = Date.now() - timestamp;
+  if (!Number.isFinite(timestamp) || age < 0 || age >= YOUTUBE_CONSENT_MAX_AGE) return null;
+  return record.choice;
+}
+
+function saveYoutubeConsent(choice) {
+  // Die Information wird ausschließlich im Browser gespeichert.
+  const record = { choice, date: new Date().toISOString(), version: YOUTUBE_CONSENT_VERSION };
+  youtubeMemoryConsent = record;
+  try {
+    // Bei teilweise fehlgeschlagenem Schreiben darf kein alter Consent gültig bleiben.
+    localStorage.removeItem("youtubeConsentVersion");
+    localStorage.setItem("youtubeConsent", record.choice);
+    localStorage.setItem("youtubeConsentDate", record.date);
+    localStorage.setItem("youtubeConsentVersion", record.version);
+    youtubeMemoryOnly = false;
+  } catch (_) {
+    youtubeMemoryOnly = true;
+    try { localStorage.removeItem("youtubeConsentVersion"); } catch (_) {}
+  }
+}
+
+function showCookieBannerIfNeeded() {
+  const choice = getYoutubeConsent();
+  if (choice !== "accepted") resetYoutubePlaceholders();
+  if (!choice && !getLegalViewFromHash()) {
+    document.getElementById("cookieBanner").classList.remove("hidden");
+  }
+}
+
+function openCookieSettings() {
+  youtubeSettingsOpener = document.activeElement;
+  document.getElementById("cookieBanner").classList.remove("hidden");
+  document.getElementById("cookieTitle").focus({ preventScroll: true });
+}
+
+function closeCookieSettings() {
+  document.getElementById("cookieBanner").classList.add("hidden");
+  if (youtubeSettingsOpener && youtubeSettingsOpener.isConnected) {
+    youtubeSettingsOpener.focus({ preventScroll: true });
+  }
+  youtubeSettingsOpener = null;
+}
+
+function allowYoutubeVideos() {
+  saveYoutubeConsent("accepted");
+  closeCookieSettings();
+  document.getElementById("youtubeConsentStatus").textContent = "YouTube ist erlaubt. Du kannst die Einwilligung jederzeit widerrufen.";
+  loadYoutubeVideosIfAllowed();
+}
+
+function denyYoutubeVideos() {
+  saveYoutubeConsent("denied");
+  closeCookieSettings();
+  resetYoutubePlaceholders();
+  document.getElementById("youtubeConsentStatus").textContent = "YouTube ist gesperrt. Vorhandene Player wurden entfernt; weitere Einbettungen unterbleiben.";
+}
+
+function loadYoutubeVideosIfAllowed() {
+  if (getYoutubeConsent() !== "accepted") {
+    showCookieBannerIfNeeded();
+    return;
+  }
+  // Auch mit Einwilligung erst im tatsächlich geöffneten Videobereich laden.
+  if (!document.getElementById("communityVideos").classList.contains("active")) return;
+  document.querySelectorAll(".video-card").forEach(card => {
+    const id = card.dataset.videoId;
+    const title = card.dataset.videoTitle || "YouTube Video";
+    if (!id || !/^[A-Za-z0-9_-]{11}$/.test(id) || card.querySelector("iframe")) return;
+    const player = document.createElement("iframe");
+    player.src = "https://www.youtube-nocookie.com/embed/" + id;
+    player.title = title;
+    player.loading = "lazy";
+    player.referrerPolicy = "strict-origin-when-cross-origin";
+    player.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    player.allowFullscreen = true;
+    card.replaceChildren(player);
+  });
+}
+
+function resetYoutubePlaceholders() {
+  document.querySelectorAll(".video-card").forEach(card => {
+    if (!card.querySelector("iframe")) return;
+    const placeholder = document.createElement("div");
+    placeholder.className = "video-placeholder";
+    const content = document.createElement("div");
+    const icon = document.createElement("div");
+    icon.className = "video-icon";
+    icon.textContent = "▶";
+    const title = document.createElement("strong");
+    title.textContent = card.dataset.videoTitle || "YouTube Video";
+    const note = document.createElement("p");
+    note.textContent = "Dieses Video wird erst nach deiner Einwilligung von YouTube geladen. Dabei können Daten an Google/YouTube übertragen werden.";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "video-btn";
+    button.onclick = openCookieSettings;
+    const caption = document.createElement("span");
+    caption.textContent = "YouTube-Einstellungen öffnen";
+    button.appendChild(caption);
+    content.append(icon, title, note, button);
+    placeholder.appendChild(content);
+    card.replaceChildren(placeholder);
+  });
+}
+
+// Widerruf bzw. gelöschte/abgelaufene Auswahl auch in weiteren geöffneten Tabs beachten.
+window.addEventListener("storage", event => {
+  if (event.key === null || ["youtubeConsent", "youtubeConsentDate", "youtubeConsentVersion"].includes(event.key)) {
+    youtubeMemoryOnly = false;
+    youtubeMemoryConsent = null;
+    const choice = getYoutubeConsent();
+    if (choice !== "accepted") resetYoutubePlaceholders();
+    document.getElementById("youtubeConsentStatus").textContent = choice === "accepted"
+      ? "YouTube ist erlaubt. Du kannst die Einwilligung jederzeit widerrufen."
+      : "YouTube ist nicht freigegeben.";
+    showCookieBannerIfNeeded();
+  }
+});
+window.addEventListener("hashchange", () => {
+  const view = getLegalViewFromHash();
+  if (view) showForm(view);
+});
+setInterval(showCookieBannerIfNeeded, 60000);
+const initialLegalView = getLegalViewFromHash();
+if (initialLegalView) showForm(initialLegalView);
+showCookieBannerIfNeeded();
+
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  onAuthStateChanged,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA9pc9Xqe5FtFTjwF0HJcc4F4Yo8Os4PnE",
+  authDomain: "community-2d37f.firebaseapp.com",
+  projectId: "community-2d37f",
+  storageBucket: "community-2d37f.firebasestorage.app",
+  messagingSenderId: "845137729755",
+  appId: "1:845137729755:web:897917ba6a8fe3a0ed94fe",
+  measurementId: "G-NFP650LD72"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+let playLoginSuccessAnimation = false;
+let loginAnimationTitle = "Willkommen zurück";
+let loginAnimationSubtitle = "Login erfolgreich";
+
+function setMessage(id, text, type) {
+  const el = document.getElementById(id);
+  el.className = "msg " + type;
+  el.textContent = text;
 }
 
 function togglePassword(inputId, button) {
@@ -2060,21 +2307,65 @@ function showCommunityTab(tab) {
 }
 
 
-function createGalleryCard(fileName, title, extraClass) {
-  const card = document.createElement("div");
+// BILDVERZEICHNIS: KI-Status immer pro Datei pflegen, auch bei gleichem Dateinamen.
+// ai: true = KI-generiert; ai: false = keine KI-Kennzeichnung (z. B. eigenes Foto).
+// Neue Bilder als eigene Zeile hinzufügen; nicht automatisch als KI einstufen.
+const GALLERY_IMAGES = [
+  { file: "1.jpg", title: "Gaming-Bild 1", ai: true },
+  { file: "2.jpg", title: "Gaming-Bild 2", ai: true },
+  { file: "3.jpg", title: "Gaming-Bild 3", ai: true },
+  { file: "4.jpg", title: "Gaming-Bild 4", ai: true },
+  { file: "5.jpg", title: "Gaming-Bild 5", ai: true },
+  { file: "6.jpg", title: "Gaming-Bild 6", ai: true },
+  { file: "7.jpg", title: "Gaming-Bild 7", ai: true },
+  { file: "8.jpg", title: "Gaming-Bild 8", ai: true },
+  { file: "9.jpg", title: "Gaming-Bild 9", ai: true },
+  { file: "10.jpg", title: "Gaming-Bild 10", ai: true },
+];
+const PRIVATE_GALLERY_IMAGES = [
+  { file: "pr1.jpg", title: "Galeriebild 1", ai: true },
+  { file: "pr2.jpg", title: "Galeriebild 2", ai: true },
+  { file: "pr3.jpg", title: "Galeriebild 3", ai: true },
+  { file: "pr4.jpg", title: "Galeriebild 4", ai: true },
+  { file: "pr5.jpg", title: "Galeriebild 5", ai: true },
+  { file: "pr6.jpg", title: "Galeriebild 6", ai: true },
+  { file: "pr7.jpg", title: "Galeriebild 7", ai: true },
+  { file: "pr8.jpg", title: "Galeriebild 8", ai: true },
+  { file: "pr9.jpg", title: "Galeriebild 9", ai: true },
+  { file: "pr10.jpg", title: "Galeriebild 10", ai: true },
+];
+
+function createGalleryCard(fileName, title, extraClass, aiGenerated = false) {
+  const card = document.createElement("figure");
   card.className = "gallery-card" + (extraClass ? " " + extraClass : "");
+  card.dataset.aiGenerated = String(aiGenerated === true);
 
   const image = document.createElement("img");
   image.src = fileName;
-  image.alt = title;
+  image.alt = title + (aiGenerated === true ? " – KI-generiert" : "");
   image.loading = "lazy";
 
   image.onerror = function () {
     card.classList.add("is-missing");
-    card.innerHTML = '<div class="gallery-missing-text">' + fileName + ' nicht gefunden<br /><small>Lege ' + fileName + ' neben die index.html</small></div>';
+    const message = document.createElement("div");
+    message.className = "gallery-missing-text";
+    message.textContent = fileName + " nicht gefunden";
+    message.appendChild(document.createElement("br"));
+    const hint = document.createElement("small");
+    hint.textContent = "Lege " + fileName + " neben die index.html";
+    message.appendChild(hint);
+    // Eine fehlende Bilddatei darf die zugehörige Kennzeichnung nicht entfernen.
+    image.replaceWith(message);
   };
 
   card.appendChild(image);
+
+  if (aiGenerated === true) {
+    const label = document.createElement("figcaption");
+    label.className = "gallery-ai-caption";
+    label.textContent = "KI-generiert";
+    card.appendChild(label);
+  }
 
   return card;
 }
@@ -2089,64 +2380,19 @@ function loadGalleryImages() {
 
   grid.dataset.loaded = "true";
 
-  // Screenshot-Galerie:
-  // Lege deine Gaming-Screenshots direkt neben die index.html.
-  // Dateinamen: 1.jpg, 2.jpg, 3.jpg ... bis 10.jpg
-  for (let i = 1; i <= 10; i++) {
-    grid.appendChild(createGalleryCard(i + ".jpg", "Screenshot " + i, ""));
-  }
-
-  // Private Bilder-Galerie:
-  // Lege deine privaten Fotos direkt neben die index.html.
-  // Dateinamen: pr1.jpg, pr2.jpg, pr3.jpg ... bis pr10.jpg
-  // Beispiel: Naturfotos, Spaziergänge, eigene Auto-Fotos oder private Community-Bilder.
-  for (let i = 1; i <= 10; i++) {
-    privateGrid.appendChild(createGalleryCard("pr" + i + ".jpg", "Privates Bild " + i, "private-photo"));
-  }
+  GALLERY_IMAGES.forEach(({ file, title, ai }) => {
+    grid.appendChild(createGalleryCard(file, title, "", ai));
+  });
+  PRIVATE_GALLERY_IMAGES.forEach(({ file, title, ai }) => {
+    privateGrid.appendChild(createGalleryCard(file, title, "private-photo", ai));
+  });
 }
-
 
 function updateClock() {
   const now = new Date();
   document.getElementById("clockTime").textContent = now.toLocaleTimeString("de-DE", { hour:"2-digit", minute:"2-digit", second:"2-digit" });
   document.getElementById("clockDate").textContent = now.toLocaleDateString("de-DE", { weekday:"short", day:"2-digit", month:"2-digit", year:"numeric" });
 }
-
-function showCookieBannerIfNeeded() {
-  const banner = document.getElementById("cookieBanner");
-  const choice = localStorage.getItem("youtubeConsent");
-  if (!choice) banner.classList.remove("hidden");
-}
-
-function openCookieSettings() {
-  document.getElementById("cookieBanner").classList.remove("hidden");
-}
-
-function allowYoutubeVideos() {
-  localStorage.setItem("youtubeConsent", "accepted");
-  localStorage.setItem("youtubeConsentDate", new Date().toISOString());
-  document.getElementById("cookieBanner").classList.add("hidden");
-  loadYoutubeVideosIfAllowed();
-}
-
-function denyYoutubeVideos() {
-  localStorage.setItem("youtubeConsent", "denied");
-  localStorage.setItem("youtubeConsentDate", new Date().toISOString());
-  document.getElementById("cookieBanner").classList.add("hidden");
-  resetYoutubePlaceholders();
-}
-
-function loadYoutubeVideosIfAllowed() {
-  if (localStorage.getItem("youtubeConsent") !== "accepted") return;
-
-  document.querySelectorAll(".video-card").forEach(card => {
-    const id = card.dataset.videoId;
-    const title = card.dataset.videoTitle || "YouTube Video";
-    if (!id || card.querySelector("iframe")) return;
-    card.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}" title="${title}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-  });
-}
-
 
 async function sha256Text(text) {
   const encoder = new TextEncoder();
@@ -2253,24 +2499,12 @@ document.addEventListener("click", function (event) {
 });
 
 
-function resetYoutubePlaceholders() {
-  document.querySelectorAll(".video-card").forEach(card => {
-    const title = card.dataset.videoTitle || "YouTube Video";
-    if (!card.querySelector("iframe")) return;
-    card.innerHTML = `
-      <div class="video-placeholder">
-        <div>
-          <div class="video-icon">▶</div>
-          <strong>${title}</strong>
-          <p>Dieses Video wird von YouTube geladen. Dabei können Daten an Google/YouTube übertragen werden.</p>
-          <button type="button" class="video-btn" onclick="allowYoutubeVideos()"><span>YouTube erlauben</span></button>
-        </div>
-      </div>
-    `;
-  });
-}
-
 onAuthStateChanged(auth, user => {
+  const legalView = getLegalViewFromHash();
+  if (legalView) {
+    showForm(legalView);
+    return;
+  }
   if (user) {
     showDashboard(user);
   } else {
@@ -2284,9 +2518,7 @@ onAuthStateChanged(auth, user => {
 
 updateClock();
 setInterval(updateClock, 1000);
-showCookieBannerIfNeeded();
 
-window.showForm = showForm;
 window.togglePassword = togglePassword;
 window.register = register;
 window.login = login;
@@ -2295,9 +2527,6 @@ window.logout = logout;
 window.toggleProfileBox = toggleProfileBox;
 window.showDashboardLegal = showDashboardLegal;
 window.showCommunityTab = showCommunityTab;
-window.allowYoutubeVideos = allowYoutubeVideos;
-window.denyYoutubeVideos = denyYoutubeVideos;
-window.openCookieSettings = openCookieSettings;
 window.protectedDownload = protectedDownload;
 window.submitProtectedPassword = submitProtectedPassword;
 window.closePasswordModal = closePasswordModal;
